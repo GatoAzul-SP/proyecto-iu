@@ -1,0 +1,179 @@
+@supports (font-variation-settings: "wdth" 200) {
+  @font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-display: swap;
+    src: "../webfonts/OpenSans/OpenSans-var_wdth,wght.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-display: swap;
+    src: "../webfonts/OpenSans/OpenSans-italic-var_wdth,wght.ttf";
+  }
+}
+
+@supports not(font-variation-settings: "wdth" 200) {
+  @font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: 100%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-400.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: 1% 80%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-400-cond.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 400;
+    font-stretch: 81% 90%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-400-semicond.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600 900;
+    font-stretch: 100%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-700.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 400;
+    font-stretch: 100%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-400-italic.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 600 900;
+    font-stretch: 100%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-700-italic.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 100 300;
+    font-stretch: 100%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-300.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600 900;
+    font-stretch: 1% 80%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-700-cond.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 400;
+    font-stretch: 1% 80%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-400-italic-cond.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 600 900;
+    font-stretch: 1% 80%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-700-italic-cond.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600 900;
+    font-stretch: 81% 90%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-700-semicond.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 400;
+    font-stretch: 81% 90%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-400-italic-semicond.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 600 900;
+    font-stretch: 81% 90%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-700-italic-semicond.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 100 300;
+    font-stretch: 1% 80%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-300-cond.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 100 300;
+    font-stretch: 81% 90%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-300-semicond.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 100 300;
+    font-stretch: 100%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-300-italic.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 100 300;
+    font-stretch: 1% 80%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-300-italic-cond.ttf";
+  }
+
+  @font-face {
+    font-family: "Open Sans";
+    font-style: italic;
+    font-weight: 100 300;
+    font-stretch: 81% 90%;
+    font-display: swap;
+    src: "../webfonts/OpenSans/static/OpenSans-300-italic-semicond.ttf";
+  }
+}

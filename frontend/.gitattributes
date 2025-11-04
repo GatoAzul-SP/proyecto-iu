@@ -1,0 +1,18 @@
+* text=auto
+
+*.html text
+*.css text
+*.js text
+*.ts text
+*.json text
+*.md text
+
+/assets/images/** binary
+/assets/webfonts/** binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.ico binary
+*.ttf binary
+*.woff2 binary

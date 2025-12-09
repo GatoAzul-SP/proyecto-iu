@@ -178,6 +178,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		menu.style.left = x + 'px';
 		menu.style.top = y + 'px';
 		menu.style.display = 'block';
+
+		const {top, height} = menu.getBoundingClientRect();
+		const windowHeight = document.documentElement.clientHeight;
+		if (top + height > windowHeight) {
+			menu.style.top = y - top + windowHeight - height + 'px';
+		}
+
 		Array.from(menu.children).forEach(child => {
 			child.onclick = function(ev){
 				const action = child.dataset.action;

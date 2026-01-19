@@ -37,7 +37,7 @@ function applySiteColors(root, colors) {
 function injectGoogleFontInDoc(doc, font) {
 	if (!doc || !font) return;
 	// Exclude fonts already present
-	if (["Poppins", "Open Sans"].indexOf(font) < 0) return;
+	if (["Poppins", "Open Sans"].indexOf(font) >= 0) return;
 
 	const id = 'gf-' + font.replace(/\s+/g,'-');
 	if (doc.getElementById(id)) return;

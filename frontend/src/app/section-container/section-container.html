@@ -1,0 +1,10 @@
+<!--<div class="section-container container">-->
+  <div class="row">
+    @if (heading()) {
+      <div class="col-lg-6 offset-lg-3">
+        <ng-content select="div.section-heading"/>
+      </div>
+    }
+    <ng-content/>
+  </div>
+<!--</div>-->

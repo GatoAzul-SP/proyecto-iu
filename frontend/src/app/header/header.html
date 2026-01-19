@@ -1,0 +1,36 @@
+<!--<header class="header-area header-sticky">-->
+  <div class="section-container">
+    <div class="col-12">
+      <nav class="main-nav">
+        <!-- ***** Logo Start ***** -->
+        <a routerLink="/" class="logo">
+          <img src="assets/images/logo.png" alt="">
+        </a>
+        <!-- ***** Logo End ***** -->
+        <!-- ***** Menu Start ***** -->
+        <ul class="nav">
+          @for (link of readLinks(links().links); track link[1]) {
+            @if (typeof link[1] == "string") {
+              <li class="scroll-to-section"><a [routerLink]="toTree(link[1])">{{ link[0] }}</a></li>
+            } @else {
+              <li class="has-sub">
+                <a>{{ link[0] }}</a>
+                <ul class="sub-menu">
+                  @for (sublink of readLinks(link[1]); track sublink[1]) {
+                    <li><a [routerLink]="toTree(sublink[1])">{{ sublink[0] }}</a></li>
+                  }
+                </ul>
+              </li>
+            }
+          }
+          @let buttonLink = readLinks(links().button)[0];
+          <li><a [routerLink]="toTree(buttonLink[1])">{{ buttonLink[0] }}</a></li>
+        </ul>
+        <a class='menu-trigger'>
+          <span>Menu</span>
+        </a>
+        <!-- ***** Menu End ***** -->
+      </nav>
+    </div>
+  </div>
+<!--</header>-->

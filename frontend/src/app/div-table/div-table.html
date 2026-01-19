@@ -1,0 +1,17 @@
+<!--<div class="div-table">-->
+  @if (model().head != undefined) {
+    <div class="main-list">
+      @for (heading of model().head; track heading) {
+        <span class="title">{{ heading }}</span>
+      }
+    </div>
+  }
+  @let headingsColumn = model().headingsColumn;
+  @for (row of model().body; track row) {
+    <div class="list-item" [class.last-item]="$last">
+      @for (elem of row; track elem) {
+        <span class="item" [class.item-title]="$first && headingsColumn">{{ elem }}</span>
+      }
+    </div>
+  }
+<!--</div>-->

@@ -1,7 +1,11 @@
 "use strict";
 
+var FONT_DB_NAME = "CustomFontsDB";
+var FONT_DB_VER = 1;
+var FONT_STORE_NAME = "fonts";
+
 function isOnAdmin() {
-	const path = (window.location && window.location.pathname) ? window.location.pathname : '';
+	const path = (window.location && window.location.pathname) ? window.location.pathname : "";
 	const test = /^\/admin\//i.test(path);
 	return test;
 }
@@ -18,73 +22,151 @@ function saveSetting(name, setting) {
 	localStorage.setItem(name, JSON.stringify(setting));
 }
 
+function openDB(name, ver, cb_upgrade) {
+	return new Promise((resolve, reject) => {
+		const request = indexedDB.open(name, ver);
+		request.onupgradeneeded = cb_upgrade;
+		request.onerror = () => { reject(request.error); };
+		request.onsuccess = () => { resolve(request.result); };
+	});
+}
+
+function getDBObject(store, key) {
+	return new Promise((resolve, reject) => {
+		const request = store.get(name);
+		request.onsuccess = () => { resolve(request.result); };
+		request.onerror = () => { reject(request.error); };
+	});
+}
+
+function openFontDB() {
+	return openDB(FONT_DB_NAME, 1, e => {
+		const db = e.target.result;
+		if (!db.objectStoreNames.contains(FONT_STORE_NAME)) {
+			db.createObjectStore(FONT_STORE_NAME, { keyPath: "name" });
+		}
+	});
+}
+
+	// Load a specific custom font from IndexedDB
+function loadCustomFont(name) {
+	return openFontDB().then(db => {
+		const tx = db.transaction(FONT_STORE_NAME, "readonly");
+		const store = tx.objectStore(FONT_STORE_NAME);
+		return getDBObject(store, name);
+	});
+}
+
 function applySiteColors(root, colors) {
 	try {
 		if (!colors) {
-			colors = loadSetting('siteColors');
+			colors = loadSetting("siteColors");
 			if (!colors) return;
 		}
 
-		for (let color of ["accent-1", "accent-2", "foreground",
-		                   "background", "background-shadowed"]) {
+		for (const color of ["accent-1", "accent-2", "foreground",
+		                     "background", "background-shadowed"]) {
 			if (colors[color]) {
 				root.style.setProperty(`--color-${color}`, colors[color]);
 			}
 		}
-	} catch(e) { console.warn('Error aplicando colores del sitio', e); }
+	} catch(e) { console.warn("Error aplicando colores del sitio", e); }
 };
 
-function injectGoogleFontInDoc(doc, font) {
-	if (!doc || !font) return;
+function injectGoogleFont(docLike, font) {
+	if (!docLike || !font) return;
 	// Exclude fonts already present
 	if (["Poppins", "Open Sans"].indexOf(font) >= 0) return;
 
-	const id = 'gf-' + font.replace(/\s+/g,'-');
-	if (doc.getElementById(id)) return;
+	const id = "gf-" + font.replace(/\s+/g,"-");
+	if (docLike.getElementById(id)) return;
 
-	const link = doc.createElement('link');
-	link.id = id; link.rel = 'stylesheet';
-	link.href = 'https://fonts.googleapis.com/css2?family=' + encodeURIComponent(font) +
-	            ':wght@300;400;500;600;700&display=swap';
-	doc.head.appendChild(link);
+	const link = document.createElement("link");
+	link.id = id; link.rel = "stylesheet";
+	link.href = "https://fonts.googleapis.com/css2?family=" + encodeURIComponent(font) +
+	            ":wght@300;400;500;600;700&display=swap";
+	(docLike.head || docLike).appendChild(link);
 }
 
-function applySiteFonts(doc /*root*/, fonts) {
-	const bodyStyle = doc.body.style;
+function injectCustomFont(docLike, fontName, blob) {
+	return new Promise((resolve, reject) => {
+		if (!(docLike && fontName && blob)) { reject(); return; }
+		const reader = new FileReader();
+		reader.onload = (e) => {
+			const dataUrl = e.target.result;
+
+			const id = "custom-font-" + fontName.replace(/\s+/g, "-");
+			if (docLike.getElementById(styleId)) { resolve(); return; }
+
+			const style = document.createElement("style");
+			style.id = id;
+			style.textContent = `
+@font-face {
+	font-family: "${fontName}";
+	src: url("${dataUrl}") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}`;
+			(docLike.head || docLike).appendChild(style);
+			resolve();
+		};
+		reader.onerror = () => { reject(); };
+		reader.readAsDataURL(blob);
+	});
+}
+
+function applySiteFonts(root, fonts) {
+	const docLike = root.getRootNode();
+	if (!docLike.getElementById) {
+		throw new TypeError("'root' no está conectado a un (sub)documento");
+	}
 
 	try {
 		if (!fonts) {
-			fonts = loadSetting('admin_typography_settings');
+			fonts = loadSetting("admin_typography_settings");
 			if (!fonts) return;
 		}
 
+		const applyFont = (propName, fontName) => {
+			if (fontName.startsWith("custom:")) {
+				fontName = fontName.slice("custom:".length);
+				loadCustomFont(fontName).then(font =>
+					injectCustomFontFace(docLike, fontName, font.blob)
+				).catch(e => { console.warn("Error cargando fuente primaria:", e); }
+				).then(() => {
+					root.style.setProperty(`--font-${propName}`, `"${fontName}"`);
+				});
+			} else {
+				injectGoogleFont(docLike, fontName);
+				root.style.setProperty(`--font-${propName}`, `"${fontName}"`);
+			}
+		}
+
 		if (fonts.primary) {
-			injectGoogleFontInDoc(doc, fonts.primary);
-			bodyStyle.setProperty("--font-title", `'${fonts.primary}'`);
+			applyFont("title", fonts.primary);
 		}
 
 		if (fonts.secondary) {
-			injectGoogleFontInDoc(doc, fonts.secondary);
-			bodyStyle.setProperty("--font-general", `'${fonts.secondary}'`);
+			applyFont("general", fonts.secondary);
 		}
 
 		if (typeof fonts.titleSize !== "undefined") {
-			bodyStyle.setProperty("--size-title", fonts.titleSize + "px");
+			root.style.setProperty("--size-title", fonts.titleSize + "px");
 		}
 
 		if (typeof fonts.subtitleSize !== "undefined") {
-			bodyStyle.setProperty("--size-subtitle", fonts.subtitleSize + "px");
+			root.style.setProperty("--size-subtitle", fonts.subtitleSize + "px");
 		}
 
 		if (typeof fonts.paragraphSize !== "undefined") {
-			bodyStyle.setProperty("--size-general", fonts.paragraphSize + "px");
+			root.style.setProperty("--size-general", fonts.paragraphSize + "px");
 		}
-	} catch (e) { console.warn('Error aplicando ajustes de fuentes del sitio', e); }
+	} catch (e) { console.warn("Error aplicando ajustes de fuentes del sitio", e); }
 
 	/*
 	try {
 		if (!fonts) {
-			fonts = loadSetting('siteFonts');
+			fonts = loadSetting("siteFonts");
 			if (!fonts) return;
 		}
 
@@ -104,26 +186,26 @@ function applySiteFonts(doc /*root*/, fonts) {
 				}
 			}
 		}
-	} catch(e) { console.warn('Error applying site font settings', e); }
+	} catch(e) { console.warn("Error applying site font settings", e); }
 	*/
 };
 
 if (!isOnAdmin()) {
 	applySiteColors(document.body);
-	applySiteFonts(document);
+	applySiteFonts(document.body);
 
 	try {
 		if (window.BroadcastChannel) {
 			const bcColors = new BroadcastChannel("admin-colors");
 			bcColors.addEventListener("message", function(ev) {
-				if (ev.data && ev.data.type === 'colors-applied' && ev.data.colors) {
+				if (ev.data && ev.data.type === "colors-applied" && ev.data.colors) {
 					applySiteColors(document.body, ev.data.colors);
 				}
 			});
 
 			const bcFonts = new BroadcastChannel("admin-typography");
 			bcFonts.addEventListener("message", function(ev) {
-				if (ev.data && ev.data.type === 'settings-applied' && ev.data.settings) {
+				if (ev.data && ev.data.type === "settings-applied" && ev.data.settings) {
 					applySiteFonts(document.body, ev.data.settings);
 				}
 			});

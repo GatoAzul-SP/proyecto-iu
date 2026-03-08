@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="assets/css/font-poppins.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="assets/css/font-poppins.css" rel="stylesheet">
 
-    <title>Mexant - Financial HTML5 Template</title>
+  <title>Mexant - Financial HTML5 Template</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-574-mexant.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/swiper.min.css">
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-574-mexant.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="assets/css/swiper.min.css">
 
 <!--
 
@@ -29,7 +29,7 @@ TemplateMo 574 Mexant
 https://templatemo.com/tm-574-mexant
 
 -->
-  </head>
+</head>
 
 <body>
   <script src="assets/js/config-pre.js"></script>
@@ -378,6 +378,7 @@ https://templatemo.com/tm-574-mexant
   <section class="calculator">
     <div class="container">
       <div class="row">
+        <!-- Considerar margen vertical o  --bs-gutter-y en row en lugar de margen para los input -->
         <!--
         <div class="col-lg-7">
           <div class="left-image">
@@ -437,7 +438,7 @@ https://templatemo.com/tm-574-mexant
             <h6>Create Account</h6>
             <h4>Register a new user</h4>
           </div>
-          <form id="create-account" action="#" method="post" class="p-3 rounded">
+          <form id="create-account" action="#" method="post" style="padding: 2.5rem; border-radius: 5px;">
             <div class="row">
               <div class="col-md-6">
                 <label for="firstName">Nombre</label>
@@ -448,7 +449,7 @@ https://templatemo.com/tm-574-mexant
                 <input type="text" id="lastName" name="lastName" required>
               </div>
               <div class="col-12">
-                <label for="registerEmail">Correo</label>
+                <label for="registerEmail">Correo Electrónico</label>
                 <input type="email" id="registerEmail" name="registerEmail" required aria-describedby="registerEmailFeedback">
                 <div id="registerEmailFeedback" class="invalid-feedback" style="display:none;color:#d9534f;margin-top:6px;">Por favor ingresa un correo válido (ej: usuario@dominio.com).</div>
               </div>
@@ -467,6 +468,11 @@ https://templatemo.com/tm-574-mexant
                   <option value="admin">Admin</option>
                 </select>
               </div>
+              <div id="registerError" class="col-12" style="display:none;">
+                <div class="alert alert-danger py-2 mb-0">
+                  <i class="fas fa-exclamation-circle me-2"></i><span id="registerErrorText"></span>
+                </div>
+              </div>
               <div class="col-12">
                 <button type="submit" class="green-button">Crear Cuenta</button>
               </div>
@@ -480,10 +486,10 @@ https://templatemo.com/tm-574-mexant
             <h6>Login</h6>
             <h4>Access your account</h4>
           </div>
-          <form id="login" action="#" method="post" class="p-3 rounded">
+          <form id="login" action="#" method="post" style="padding: 2.5rem; border-radius: 5px;">
             <div class="row">
               <div class="col-12">
-                <label for="loginEmail">Correo</label>
+                <label for="loginEmail">Correo Electrónico</label>
                 <input type="email" id="loginEmail" name="loginEmail" required aria-describedby="loginEmailFeedback">
                 <div id="loginEmailFeedback" class="invalid-feedback" style="display:none;color:#d9534f;margin-top:6px;">Por favor ingresa un correo válido (ej: usuario@dominio.com).</div>
               </div>
@@ -498,6 +504,11 @@ https://templatemo.com/tm-574-mexant
                   <option value="admin">Admin</option>
                 </select>
               </div>
+              <div id="loginError" class="col-12" style="display:none;">
+                <div class="alert alert-danger py-2 mb-0">
+                  <i class="fas fa-exclamation-circle me-2"></i><span id="loginErrorText"></span>
+                </div>
+              </div>
               <div class="col-12">
                 <button type="submit" class="orange-button">Iniciar Sesión</button>
               </div>
@@ -508,42 +519,84 @@ https://templatemo.com/tm-574-mexant
     </div>
   </section>
 
-  <section class="testimonials" id="testimonials">
+  <section class="testimonials" id="gallery">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
           <div class="section-heading">
-            <h6>Testimonials</h6>
-            <h4>What They Say</h4>
+            <h6>Gallery</h6>
+            <h4>Featured Images</h4>
           </div>
         </div>
-        <div class="col-lg-10 offset-lg-1">
-          <div class="owl-testimonials owl-carousel" style="position: relative; z-index: 5;">
+        <div class="col-lg-12">
+          <div class="owl-carousel owl-media custom-nav">
             <div class="item">
-              <i class="fa fa-quote-left"></i>
-              <p>“Donec et nunc massa. Nullam non felis dignissim, dapibus turpis semper, vulputate lorem. Nam volutpat posuere tellus, in porttitor justo interdum nec. Aenean in dapibus risus, in euismod ligula. Aliquam vel scelerisque elit.”</p>
-              <h4>David Eigenberg</h4>
-              <span>CEO of Mexant</span>
-              <div class="right-image">
-                <img src="assets/images/testimonials-01.jpg" alt="">
+              <div class="media-card">
+                <img src="assets/images/service-image-01.jpg" alt="Servicio 1">
+                <div class="overlay"><i class="fa fa-search-plus"></i></div>
               </div>
             </div>
             <div class="item">
-              <i class="fa fa-quote-left"></i>
-              <p>“Etiam id ligula risus. Fusce fringilla nisl nunc, nec rutrum lectus cursus nec. In blandit nibh dolor, at rutrum leo accumsan porta. Nullam pulvinar eros porttitor risus condimentum tempus.”</p>
-              <h4>Andrew Garfield</h4>
-              <span>CTO of Mexant</span>
-              <div class="right-image">
-                <img src="assets/images/testimonials-01.jpg" alt="">
+              <div class="media-card">
+                <img src="assets/images/service-image-02.jpg" alt="Servicio 2">
+                <div class="overlay"><i class="fa fa-search-plus"></i></div>
               </div>
             </div>
             <div class="item">
-              <i class="fa fa-quote-left"></i>
-              <p>“Ut dictum vehicula massa, ac pharetra leo tincidunt eu. Phasellus in tristique magna, ac gravida leo. Integer sed lorem sapien. Ut viverra mauris sed lobortis commodo.”</p>
-              <h4>George Lopez</h4>
-              <span>Crypto Manager</span>
-              <div class="right-image">
-                <img src="assets/images/testimonials-01.jpg" alt="">
+              <div class="media-card">
+                <img src="assets/images/service-image-03.jpg" alt="Servicio 3">
+                <div class="overlay"><i class="fa fa-search-plus"></i></div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="media-card">
+                <img src="assets/images/about-left-image.jpg" alt="Sobre Nosotros">
+                <div class="overlay"><i class="fa fa-search-plus"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials" id="videos">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading">
+            <h6>Multimedia</h6>
+            <h4>Curated Videos</h4>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="owl-carousel owl-media custom-nav">
+            <div class="item">
+              <div class="media-card video-card">
+                <img src="assets/images/service-details-01.jpg" alt="Video 1">
+                <i class="play-icon fa fa-play-circle"></i>
+                <div class="video-label">Nuestros Servicios</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="media-card video-card">
+                <img src="assets/images/service-details-02.jpg" alt="Video 2">
+                <i class="play-icon fa fa-play-circle"></i>
+                <div class="video-label">Conoce al Equipo</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="media-card video-card">
+                <img src="assets/images/service-details-03.jpg" alt="Video 3">
+                <i class="play-icon fa fa-play-circle"></i>
+                <div class="video-label">Casos de Éxito</div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="media-card video-card">
+                <img src="assets/images/testimonials-01.jpg" alt="Video 4">
+                <i class="play-icon fa fa-play-circle"></i>
+                <div class="video-label">Testimonios</div>
               </div>
             </div>
           </div>
@@ -603,161 +656,219 @@ https://templatemo.com/tm-574-mexant
 
   <!-- Scripts -->
   <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <!--<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>-->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!--<script src="assets/js/isotope.min.js"></script>-->
-    <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
 
-    <script src="assets/js/tabs.js"></script>
-    <script src="assets/js/swiper.js"></script>
-    <script src="assets/js/custom.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/swiper.js"></script>
+  <script src="assets/js/custom.js"></script>
 
-    <script>
-      (function () {
-        // Simple user store in localStorage for demo purposes
-        function getUsers() {
-          try {
-            return JSON.parse(localStorage.getItem('users') || '[]');
-          } catch (e) {
-            return [];
-          }
+  <script>
+    (function () {
+      // Simple user store in localStorage for demo purposes
+      function getUsers() {
+        try {
+          return JSON.parse(localStorage.getItem('users') || '[]');
+        } catch (e) {
+          return [];
         }
+      }
 
-        function saveUsers(users) {
-          localStorage.setItem('users', JSON.stringify(users));
+      function saveUsers(users) {
+        localStorage.setItem('users', JSON.stringify(users));
+      }
+
+      // Simple email validation helper (RFC-lite)
+      function isValidEmail(email) {
+        if (!email || typeof email !== 'string') return false;
+        // Basic pattern: something@something.tld (no spaces)
+        var re = /^\S+@\S+\.\S+$/;
+        return re.test(email);
+      }
+
+      // Helper to show/hide feedback
+      function setEmailFeedback(inputId, valid) {
+        var input = document.getElementById(inputId);
+        var feedback = document.getElementById(inputId === 'registerEmail' ? 'registerEmailFeedback' : 'loginEmailFeedback');
+        if (!input || !feedback) return;
+        if (valid) {
+          feedback.style.display = 'none';
+          input.setAttribute('aria-invalid', 'false');
+          input.classList.remove('is-invalid');
+        } else {
+          feedback.style.display = 'block';
+          input.setAttribute('aria-invalid', 'true');
+          input.classList.add('is-invalid');
         }
+      }
 
-        // Simple email validation helper (RFC-lite)
-        function isValidEmail(email) {
-          if (!email || typeof email !== 'string') return false;
-          // Basic pattern: something@something.tld (no spaces)
-          var re = /^\S+@\S+\.\S+$/;
-          return re.test(email);
+      // Helper to show/hide form error messages
+      function showRegisterError(message) {
+        var errorDiv = document.getElementById('registerError');
+        var errorText = document.getElementById('registerErrorText');
+        if (errorDiv && errorText) {
+          errorText.textContent = message;
+          errorDiv.style.display = 'block';
         }
+      }
+      function hideRegisterError() {
+        var errorDiv = document.getElementById('registerError');
+        if (errorDiv) errorDiv.style.display = 'none';
+      }
+      function showLoginError(message) {
+        var errorDiv = document.getElementById('loginError');
+        var errorText = document.getElementById('loginErrorText');
+        if (errorDiv && errorText) {
+          errorText.textContent = message;
+          errorDiv.style.display = 'block';
+        }
+      }
+      function hideLoginError() {
+        var errorDiv = document.getElementById('loginError');
+        if (errorDiv) errorDiv.style.display = 'none';
+      }
 
-        // Helper to show/hide feedback
-        function setEmailFeedback(inputId, valid) {
-          var input = document.getElementById(inputId);
-          var feedback = document.getElementById(inputId === 'registerEmail' ? 'registerEmailFeedback' : 'loginEmailFeedback');
-          if (!input || !feedback) return;
-          if (valid) {
-            feedback.style.display = 'none';
-            input.setAttribute('aria-invalid', 'false');
-            input.classList.remove('is-invalid');
+      // Create account handler
+      var createForm = document.getElementById('create-account');
+      if (createForm) {
+        createForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var fn = (document.getElementById('firstName') || {}).value || '';
+          var ln = (document.getElementById('lastName') || {}).value || '';
+          var emailInput = (document.getElementById('registerEmail') || {});
+          var email = (emailInput.value || '').trim().toLowerCase();
+          var pw = (document.getElementById('registerPassword') || {}).value || '';
+          var cpw = (document.getElementById('confirmPassword') || {}).value || '';
+          var role = (document.getElementById('registerRole') || {}).value || 'normal';
+
+          // Validate email format
+          if (!isValidEmail(email)) {
+            setEmailFeedback('registerEmail', false);
+            return;
           } else {
-            feedback.style.display = 'block';
-            input.setAttribute('aria-invalid', 'true');
-            input.classList.add('is-invalid');
+            setEmailFeedback('registerEmail', true);
           }
-        }
 
-        // Create account handler
-        var createForm = document.getElementById('create-account');
-        if (createForm) {
-          createForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            var fn = (document.getElementById('firstName') || {}).value || '';
-            var ln = (document.getElementById('lastName') || {}).value || '';
-            var emailInput = (document.getElementById('registerEmail') || {});
-            var email = (emailInput.value || '').trim().toLowerCase();
-            var pw = (document.getElementById('registerPassword') || {}).value || '';
-            var cpw = (document.getElementById('confirmPassword') || {}).value || '';
-            var role = (document.getElementById('registerRole') || {}).value || 'normal';
+          // Hide previous errors
+          hideRegisterError();
 
-            // Validate email format
-            if (!isValidEmail(email)) {
-              setEmailFeedback('registerEmail', false);
-              return;
-            } else {
-              setEmailFeedback('registerEmail', true);
-            }
+          if (!fn || !ln || !email || !pw || !cpw) {
+            showRegisterError('Por favor completa todos los campos.');
+            return;
+          }
+          if (pw !== cpw) {
+            showRegisterError('Las contraseñas no coinciden.');
+            return;
+          }
 
-            if (!fn || !ln || !email || !pw || !cpw) {
-              alert('Por favor completa todos los campos.');
-              return;
-            }
-            if (pw !== cpw) {
-              alert('Las contraseñas no coinciden.');
-              return;
-            }
+          var users = getUsers();
+          if (users.some(function (u) { return u.email === email; })) {
+            showRegisterError('Ya existe un usuario con ese correo.');
+            return;
+          }
 
-            var users = getUsers();
-            if (users.some(function (u) { return u.email === email; })) {
-              alert('Ya existe un usuario con ese correo.');
-              return;
-            }
+          var user = {
+            firstName: fn,
+            lastName: ln,
+            email: email,
+            password: pw,
+            role: role,
+            created: Date.now()
+          };
+          users.push(user);
+          saveUsers(users);
+          alert('Usuario creado correctamente.');
 
-            var user = {
+          if (role === 'admin') {
+            // Save current user session for admin
+            localStorage.setItem('admin_session', JSON.stringify({
               firstName: fn,
               lastName: ln,
               email: email,
-              password: pw,
-              role: role,
-              created: Date.now()
-            };
-            users.push(user);
-            saveUsers(users);
-            alert('Usuario creado correctamente.');
-
-            if (role === 'admin') {
-              // Redirect to admin page for validation (will 404 until admin restored)
-              window.location.href = '/admin/admin.html';
-            } else {
-              createForm.reset();
-            }
-          });
-        }
-
-        // Login handler
-        var loginForm = document.getElementById('login');
-        if (loginForm) {
-          loginForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            var emailInput = (document.getElementById('loginEmail') || {});
-            var email = (emailInput.value || '').trim().toLowerCase();
-            var pw = (document.getElementById('loginPassword') || {}).value || '';
-
-            // Validate email format
-            if (!isValidEmail(email)) {
-              setEmailFeedback('loginEmail', false);
-              return;
-            } else {
-              setEmailFeedback('loginEmail', true);
-            }
-
-            if (!email || !pw) {
-              alert('Por favor introduce correo y contraseña.');
-              return;
-            }
-
-            var users = getUsers();
-            var found = users.find(function (u) { return u.email === email && u.password === pw; });
-            if (!found) {
-              alert('Usuario o contraseña inválidos.');
-              return;
-            }
-
-            alert('Login exitoso. Rol: ' + found.role);
-            if (found.role === 'admin') {
-              window.location.href = '/admin/admin.html';
-            } else {
-              loginForm.reset();
-            }
-          });
-        }
-
-        // Ensure a demo admin exists so you can test redirect without manual registration
-        (function ensureDemoAdmin() {
-          var users = getUsers();
-          if (!users.some(function (u) { return u.role === 'admin'; })) {
-            users.push({ firstName: 'Admin', lastName: 'Demo', email: 'admin@example.com', password: 'admin123', role: 'admin', created: Date.now() });
-            saveUsers(users);
-            console.log('Demo admin created: admin@example.com / admin123');
+              role: role
+            }));
+            // Redirect to admin page
+            navigateWithLoader('/admin/admin.html');
+          } else {
+            // Save current user session for normal user
+            localStorage.setItem('user_session', JSON.stringify({
+              firstName: fn,
+              lastName: ln,
+              email: email,
+              role: role
+            }));
+            // Redirect normal users to CV page
+            navigateWithLoader('/cv/cv.html');
           }
-        })();
+        });
+      }
+
+      // Login handler
+      var loginForm = document.getElementById('login');
+      if (loginForm) {
+        loginForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var emailInput = (document.getElementById('loginEmail') || {});
+          var email = (emailInput.value || '').trim().toLowerCase();
+          var pw = (document.getElementById('loginPassword') || {}).value || '';
+
+          // Validate email format
+          if (!isValidEmail(email)) {
+            setEmailFeedback('loginEmail', false);
+            return;
+          } else {
+            setEmailFeedback('loginEmail', true);
+          }
+
+          // Hide previous errors
+          hideLoginError();
+
+          if (!email || !pw) {
+            showLoginError('Por favor introduce correo y contraseña.');
+            return;
+          }
+
+          var users = getUsers();
+          var found = users.find(function (u) { return u.email === email && u.password === pw; });
+          if (!found) {
+            showLoginError('Usuario o contraseña inválidos.');
+            return;
+          }
+
+          // Success - save session and redirect
+          if (found.role === 'admin') {
+            localStorage.setItem('admin_session', JSON.stringify({
+              firstName: found.firstName,
+              lastName: found.lastName,
+              email: found.email,
+              role: found.role
+            }));
+            navigateWithLoader('/admin/admin.html');
+          } else {
+            localStorage.setItem('user_session', JSON.stringify({
+              firstName: found.firstName,
+              lastName: found.lastName,
+              email: found.email,
+              role: found.role
+            }));
+            // Redirect normal users to CV page
+            navigateWithLoader('/cv/cv.html');
+          }
+        });
+      }
+
+      // Ensure a demo admin exists so you can test redirect without manual registration
+      (function ensureDemoAdmin() {
+        var users = getUsers();
+        if (!users.some(function (u) { return u.role === 'admin'; })) {
+          users.push({ firstName: 'Admin', lastName: 'Demo', email: 'admin@example.com', password: 'admin123', role: 'admin', created: Date.now() });
+          saveUsers(users);
+          console.log('Demo admin created: admin@example.com / admin123');
+        }
       })();
-    </script>
-  </body>
+    })();
+  </script>
+</body>
 </html>

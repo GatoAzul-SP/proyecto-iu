@@ -1099,7 +1099,7 @@ section.calculator .section-heading h4 {
   padding: 0.5625em 0.75em;
   color: var(--color-foreground, #212741);
   font-size: var(--size-general, 14px);
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   outline: none;
 }
 
@@ -1113,6 +1113,12 @@ section.calculator .section-heading h4 {
   cursor: pointer;
   border: 1px solid var(--color-foreground, #212741);
   box-shadow: none;
+}
+
+.calculator input:focus,
+.calculator select:focus {
+  border-color: var(--color-accent-1, #43ba7f);
+  box-shadow: 0 0 0 0.25em rgb(from var(--color-accent-1) r g b / 0.25);
 }
 
 .calculator button.orange-button,

@@ -1,12 +1,15 @@
 import { Component, signal, WritableSignal, inject, afterNextRender, OnDestroy } from "@angular/core";
 import { DOCUMENT } from "@angular/common";
 import { Header, HeaderDescription } from "../header/header";
+import { Carousel, SwiperOptions } from "../carousel/carousel";
+import * as CarouselMods from "../carousel/carousel-mods";
+import { CarouselSlide } from "../carousel/carousel-slide/carousel-slide";
 import { SlideshowBanner } from "../slideshow-banner/slideshow-banner";
 import { SlideshowBannerSlide } from "../slideshow-banner/slideshow-banner-slide/slideshow-banner-slide";
 import { AccentedButton } from "../accented-button/accented-button";
 import { SectionContainer } from "../section-container/section-container";
 import { SectionHeading } from "../section-heading/section-heading";
-import { Card } from "../card/card";
+//import { Card } from "../card/card";
 import { ServiceCard } from "../service-card/service-card";
 import { GridContainer } from "../grid-container/grid-container";
 import { GridContainerItem } from "../grid-container/grid-container-item/grid-container-item";
@@ -14,6 +17,8 @@ import { SimpleCTA } from "../simple-cta/simple-cta";
 import { OverlayContainer } from "../overlay-container/overlay-container";
 import { OverlayContainerItem } from "../overlay-container/overlay-container-item/overlay-container-item";
 import { DivTable, TableModel } from "../div-table/div-table";
+import { ImageCard } from "../image-card/image-card";
+import { VideoCard } from "../video-card/video-card";
 import { PartnersSection } from "../partners-section/partners-section";
 import { Footer } from "../footer/footer";
 import { ExternalHiddenContentService } from "../external-hidden-content-service";
@@ -21,10 +26,10 @@ import { ExternalHiddenContentService } from "../external-hidden-content-service
 @Component({
 	selector: "app-home",
 	imports: [
-		Header, SlideshowBanner, SlideshowBannerSlide, AccentedButton, SectionContainer,
-		SectionHeading, Card, ServiceCard, GridContainer, GridContainerItem,
-		SimpleCTA, OverlayContainer, OverlayContainerItem, DivTable, PartnersSection,
-		Footer
+		Header, Carousel, CarouselSlide, SlideshowBanner, SlideshowBannerSlide,
+		AccentedButton, SectionContainer, SectionHeading, /*Card,*/ ServiceCard,
+		GridContainer, GridContainerItem, SimpleCTA, OverlayContainer, OverlayContainerItem,
+		DivTable, ImageCard, VideoCard, PartnersSection, Footer
 	],
 	templateUrl: "./home.html",
 	styleUrl: "./home.css",
@@ -43,6 +48,44 @@ export class Home implements OnDestroy {
 			Testimonials: "#testimonials"
 		},
 		button: {"Contact Support": "contact-us.html"}
+	});
+
+	private _interleaveOffset = 0.5;
+	protected readonly bannerOptions = signal<SwiperOptions>({
+		modules: [...Object.values(CarouselMods)],
+		loop: true,
+		speed: 1000,
+		grabCursor: true,
+		watchSlidesProgress: true,
+		keyboard: true,
+		mousewheel:  { enabled: true, forceToAxis: true },
+		navigation: true,
+		/*on: {
+			progress: function() {
+				var swiper = this;
+				for (var i = 0; i < swiper.slides.length; i++) {
+					var slideProgress = swiper.slides[i].progress;
+					var innerOffset = swiper.width * interleaveOffset;
+					var innerTranslate = slideProgress * innerOffset;
+					swiper.slides[i].querySelector(".slide-inner").style.transform =
+						"translate3d(" + innerTranslate + "px, 0, 0)";
+				}
+			},
+			touchStart: function() {
+				var swiper = this;
+				for (var i = 0; i < swiper.slides.length; i++) {
+					swiper.slides[i].style.transition = "";
+				}
+			},
+			setTransition: function(speed) {
+				var swiper = this;
+				for (var i = 0; i < swiper.slides.length; i++) {
+					swiper.slides[i].style.transition = speed + "ms";
+					swiper.slides[i].querySelector(".slide-inner").style.transition =
+						speed + "ms";
+				}
+			}
+		}*/
 	});
 
 	protected readonly tableTitles = signal(["Web Design", "Graphics", "Web Coding"]);
@@ -75,6 +118,32 @@ export class Home implements OnDestroy {
 			_cols: 4
 		} as any as TableModel))
 	];
+
+	protected readonly carouselOptions = signal<SwiperOptions>({
+		modules: [...Object.values(CarouselMods)],
+		loop: true,
+		spaceBetween: 45,
+		keyboard: true,
+		mousewheel: { enabled: true, forceToAxis: true },
+		navigation: true,
+		pagination: { enabled: true, clickable: true },
+		speed: 1000,
+		autoplay: {
+			delay: 5000,
+			disableOnInteraction: true
+		},
+		breakpoints: {
+			0: {
+			slidesPerView: 1 // En celular se ve 1
+			},
+			768: {
+			slidesPerView: 2 // En tablet se ven 2
+			},
+			992: {
+			slidesPerView: 3 // En pantalla grande se ven 3
+			}
+		}
+	});
 
 	protected readonly partnerLogos = signal<string[]>(Array(6).fill("assets/images/client-01.png"));
 

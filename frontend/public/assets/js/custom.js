@@ -128,8 +128,31 @@
 		}
 	})
 
+	/*
+	// Inicializar los dos carruseles con configuración de 3 items
+	$('.owl-media').owlCarousel({
+		loop: true,
+		margin: 30, // Espacio entre recuadros
+		nav: true,
+		dots: true,
+		autoplay: true,
+		autoplayTimeout: 5000,
+		smartSpeed: 1000,
+		responsive: {
+			0: {
+			items: 1 // En celular se ve 1
+			},
+			768: {
+			items: 2 // En tablet se ven 2
+			},
+			992: {
+			items: 3 // En pantalla grande se ven 3
+			}
+		}
+	});
+	*/
 
-	{
+	/*{
 		let interleaveOffset = 0.5;
 
 		let swiperOptions = {
@@ -142,8 +165,8 @@
 			navigation: {
 				nextEl: ".swiper-button-next",
 				prevEl: ".swiper-button-prev"
-			},
-			on: {} /*
+			},*/
+			/*on: {}
 			{
 				progress: function() {
 					var swiper = this;
@@ -171,11 +194,12 @@
 				}
 			}
 			*/
-		};
+		/*};
 
-		var swiper = new Swiper(".swiper-container", swiperOptions);
-	}
-
+		if (document.querySelector(".swiper-container")) {
+			var swiper = new Swiper(".swiper-container", swiperOptions);
+		}
+	}*/
 
 	// Menu Dropdown Toggle
 	if($('.menu-trigger').length){

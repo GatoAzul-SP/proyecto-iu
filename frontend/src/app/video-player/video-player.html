@@ -1,0 +1,77 @@
+<!--<div class="video-player">-->
+  <video #video (play)="handlePlay()" (pause)="handlePause()"
+    (timeupdate)="_currentTime.set(video.currentTime)"
+    (durationchange)="_duration.set(video.duration)"
+    (volumechange)="_volume.set(video.volume); _muted.set(video.muted)"
+    preload="metadata">
+    @for (src of sources(); track src.url) {
+      @if (src.type) {
+        <source [src]="src.url" [type]="src.type"/>
+      } @else {
+        <source [src]="src.url"/>
+      }
+    }
+    @for (text of texts(); track text.url) {
+      @if (text.kind) {
+        <track [src]="text.url" [key]="text.url" [kind]="text.kind" [label]="text.label" [srclang]="text.lang"/>
+      } @else {
+        <track [src]="text.url" [key]="text.url" [label]="text.label" [srclang]="text.lang"/>
+      }
+    }
+    @if (sources().length) {
+      Your browser can't show this video, but you can <a [href]="sources()[0]">download
+      the video</a> instead.
+    }
+  </video>
+  <div class="audios">
+    @for (audio of audios(); track audio.url) {
+      <audio [ariaLabel]="audio.label" [key]="audio.url" [volume]="_volume()" preload="metadata">
+        @if (audio.type) {
+          <source [src]="audio.url" [type]="audio.type"/>
+        } @else {
+          <source [src]="audio.url"/>
+        }
+      </audio>
+    }
+  </div>
+  <menu>
+    <button class="menu-button fas" [class]="_paused() ? 'fa-play' : 'fa-pause'"
+      (click)="togglePause()" type="button"></button>
+
+    <span class="video-time current">{{ currentTimeLabel() }}</span>
+    <span class="video-time total">{{ durationLabel() }}</span>
+
+    <input #progress type="range" class="video-progress-bar" max="1" step="any"
+      (pointerdown)="handleSeekStart($event)" (mousedown)="handleSeekStart($event)"
+      (input)="seek(progress.valueAsNumber * _duration())"
+      (pointerup)="handleSeekEnd($event)" (mouseup)="handleSeekEnd($event)"/>
+
+    <span class="fill-space"></span>
+
+    <div class="menu-group expand">
+      <button class="menu-button fas" [class]="_muted() ? 'fa-volume-xmark' : 'fa-volume-high'"
+        type="button"></button>
+      <input type="range" class="compress" max="1" step="any"
+        (input)="setVolume(small() ? 1 - $event.target.valueAsNumber : $event.target.valueAsNumber)"
+        [valueAsNumber]="small() ? 1 - _volume() : _volume()"/>
+    </div>
+    <div class="menu-group">
+      <button class="menu-button fas fa-closed-captioning" type="button"></button>
+      @if (!boundTexts()) {
+        <ul class="compress">
+          @for (text of texts(); track text.url) {
+            <li (click)="changeText($index)">{{ text.label }}</li>
+          }
+        </ul>
+      }
+    </div>
+    <div class="menu-group">
+      <button class="menu-button fas fa-headphones" type="button"></button>
+      <ul class="compress">
+        @for (audio of audios(); track audio.url) {
+          <li (click)="changeAudio($index)">{{ audio.label }}</li>
+        }
+      </ul>
+    </div>
+  </menu>
+<!--</div>-->

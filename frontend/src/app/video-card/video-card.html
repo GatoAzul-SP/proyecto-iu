@@ -1,0 +1,7 @@
+<!--<div class="media-card video">--> <!-- Ambas clases forman el selector -->
+  <img [src]="imgSrc()" [alt]="imgAlt()"/>
+  <i class="fas fa-play-circle" (click)="play()"></i>
+  <div class="video-label">{{ vidLabel() }}</div>
+  <div class="video-player" [sources]="vidConfig().sources"
+   [audios]="vidConfig().audios" [texts]="vidConfig().texts"></div>
+<!--</div>-->

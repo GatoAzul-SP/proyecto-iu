@@ -8,7 +8,8 @@ import { AccentedButton } from "../../accented-button/accented-button";
 	templateUrl: "./slideshow-banner-slide.html",
 	styleUrl: "./slideshow-banner-slide.css",
 	host: {
-		"[class]": "'swiper-slide'"
+		"[class]": "'slide-inner'",
+		"[style.background-image]": "`url(${ bgImg() })`"
 	}
 })
 export class SlideshowBannerSlide {

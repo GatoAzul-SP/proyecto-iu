@@ -1,0 +1,12 @@
+<!--<div class="carousel swiper">-->
+  @if (config().navigation) {
+    <div class="swiper-button-prev" #prev></div>
+    <div class="swiper-button-next" #next></div>
+  }
+  <div class="swiper-wrapper">
+    <ng-content select="div.carousel-slide"/>
+  </div>
+  @if (config().pagination) {
+    <div class="swiper-pagination" #pager></div>
+  }
+<!--</div>-->

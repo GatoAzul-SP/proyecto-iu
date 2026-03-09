@@ -34,7 +34,7 @@
       </audio>
     }
   </div>
-  <menu>
+  <div class="menu">
     <button class="menu-button fas" [class]="_paused() ? 'fa-play' : 'fa-pause'"
       (click)="togglePause()" type="button"></button>
 
@@ -58,20 +58,20 @@
     <div class="menu-group">
       <button class="menu-button fas fa-closed-captioning" type="button"></button>
       @if (!boundTexts()) {
-        <ul class="compress">
+        <menu class="compress">
           @for (text of texts(); track text.url) {
             <li (click)="changeText($index)">{{ text.label }}</li>
           }
-        </ul>
+        </menu>
       }
     </div>
     <div class="menu-group">
       <button class="menu-button fas fa-headphones" type="button"></button>
-      <ul class="compress">
+      <menu class="compress">
         @for (audio of audios(); track audio.url) {
           <li (click)="changeAudio($index)">{{ audio.label }}</li>
         }
-      </ul>
+      </menu>
     </div>
-  </menu>
+  </div>
 <!--</div>-->

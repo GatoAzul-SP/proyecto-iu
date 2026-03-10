@@ -9,9 +9,7 @@ export const appConfig: ApplicationConfig = {
 		provideBrowserGlobalErrorListeners(),
 		provideZonelessChangeDetection(),
 		provideRouter(routes, withNavigationErrorHandler(err => {
-			if (!err.target) {
-				location.href = err.url;
-			}
+			location.href = err.url;
 		})),
 		provideClientHydration(withEventReplay())
 	]

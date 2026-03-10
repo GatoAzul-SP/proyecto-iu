@@ -108,6 +108,7 @@
 		}
 	});
 
+	/*
 	$('.owl-testimonials').owlCarousel({
 		items:1,
 		loop:true,
@@ -127,6 +128,7 @@
 			}
 		}
 	})
+	*/
 
 	/*
 	// Inicializar los dos carruseles con configuración de 3 items

@@ -123,7 +123,7 @@ html,
 body {
   --color-foreground: black;
   --color-background: white;
-  --color-background-shadowed: #e0e0e0;
+  --color-background-shadowed: #f0f0f0;
   --color-accent-1: #fd18c0;
   --color-accent-2: #cb69f2;
   --size-title: 36px;
@@ -1441,13 +1441,20 @@ section.testimonials .section-heading {
   padding: 14px 7px;
 }
 
-.video-player .menu .menu-group ::-webkit-slider-runnable-track,
-.video-player .menu .menu-group ::-moz-range-track {
+.video-player .menu .menu-group ::-webkit-slider-runnable-track{
   -webkit-appearance: none;
   border: 1px solid var(--color-background-shadowed, #f0f0f0);
 }
 
-.video-player .menu .menu-group ::-webkit-slider-thumb,
+.video-player .menu .menu-group ::-moz-range-track {
+  border: 1px solid var(--color-background-shadowed, #f0f0f0);
+}
+
+.video-player .menu .menu-group ::-webkit-slider-thumb {
+  background-color: var(--color-background, #fff);
+  border: none;
+}
+
 .video-player .menu .menu-group ::-moz-range-thumb {
   background-color: var(--color-background, #fff);
   border: none;
@@ -1509,6 +1516,11 @@ section.testimonials .section-heading {
   background-size: var(--current);
 }
 
+.video-progress-bar::-webkit-slider-thumb {
+  border: none;
+  background-color: var(--color-background, #fff);
+}
+
 .video-progress-bar::-moz-range-track,
 .video-progress-bar::-moz-range-progress,
 .video-progress-bar::-moz-range-thumb {
@@ -1523,7 +1535,6 @@ section.testimonials .section-heading {
   background-color: var(--color-accent-2, #ff511a);
 }
 
-.video-progress-bar::-webkit-slider-thumb,
 .video-progress-bar::-moz-range-thumb {
   border: none;
   background-color: var(--color-background, #fff);

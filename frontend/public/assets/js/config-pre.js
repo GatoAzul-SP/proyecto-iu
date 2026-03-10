@@ -48,7 +48,7 @@ function openFontDB() {
 	});
 }
 
-	// Load a specific custom font from IndexedDB
+// Load a specific custom font from IndexedDB
 function loadCustomFont(name) {
 	return openFontDB().then(db => {
 		const tx = db.transaction(FONT_STORE_NAME, "readonly");

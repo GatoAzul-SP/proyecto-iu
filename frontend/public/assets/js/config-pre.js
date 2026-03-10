@@ -39,6 +39,23 @@ function getDBObject(store, key) {
 	});
 }
 
+function getAllDBObjects(store) {
+	return new Promise((resolve, reject) => {
+		const request = store.getAll();
+		request.onsuccess = () => { resolve(request.result); };
+		request.onerror = () => { reject(request.error); };
+	});
+}
+
+function storeDBObject(store, key, obj) {
+	return new Promise((resolve, reject) => {
+		const request = store.put(obj);
+		request.onsuccess = () => resolve();
+		request.onerror = () => reject(request.error);
+	});
+}
+
+
 function openFontDB() {
 	return openDB(FONT_DB_NAME, 1, e => {
 		const db = e.target.result;

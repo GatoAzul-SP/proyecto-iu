@@ -121,11 +121,11 @@ global styles
 */
 html,
 body {
-  --color-foreground: #212741;
+  --color-foreground: black;
   --color-background: white;
-  --color-background-shadowed: #f0f0f0;
-  --color-accent-1: #43ba7f;
-  --color-accent-2: #ff511a;
+  --color-background-shadowed: #e0e0e0;
+  --color-accent-1: #fd18c0;
+  --color-accent-2: #cb69f2;
   --size-title: 36px;
   --size-subtitle: 24px;
   --size-general: 16px;
@@ -175,12 +175,12 @@ p {
 
 .primary-button a {
   font-size: var(--size-general, 14px);
-  color: var(--color-background, #fff);
+  color: var(--color-foreground, #212741);
   background-color: var(--color-accent-1, #43ba7f);
   padding: 12px 30px;
   display: inline-block;
   border-radius: 5px;
-  font-weight: 500;
+  font-weight: bold /*500*/;
   text-transform: capitalize;
   letter-spacing: calc(var(--size-general, 14px) / 28);
   transition: all .3s;
@@ -192,12 +192,12 @@ p {
 
 .secondary-button a {
   font-size: var(--size-general, 14px);
-  color: var(--color-background, #fff);
+  color: var(--color-foreground, #212741);
   background-color: var(--color-accent-2, #ff511a);
   padding: 12px 30px;
   display: inline-block;
   border-radius: 5px;
-  font-weight: 500;
+  font-weight: bold /*500*/;
   text-transform: capitalize;
   letter-spacing: calc(var(--size-general, 14px) / 28);
   transition: all .3s;
@@ -352,12 +352,12 @@ header
 
 .header-area .main-nav .nav li:last-child a {
   font-size: var(--size-general, 14px);
-  color: var(--color-background, #fff);
+  color: var(--color-foreground, #212741);
   background-color: var(--color-accent-1, #43ba7f);
   padding: 10px 20px;
   display: inline-block;
   border-radius: 5px;
-  font-weight: 500;
+  font-weight: bold /*500*/;
   text-transform: capitalize;
   height: auto;
   line-height: 25px; /*TBD*/
@@ -382,7 +382,7 @@ header
 }
 
 .header-area .main-nav .nav li:last-child:hover a {
-  color: var(--color-background, #fff);
+  color: var(--color-foreground, #212741);
 }
 
 .header-area .main-nav .nav li.has-sub {
@@ -1137,12 +1137,12 @@ section.calculator .section-heading h4 {
 .form button.primary-button,
 .form button.secondary-button {
   font-size: var(--size-general, 14px);
-  color: var(--color-background, #fff);
+  color: var(--color-foreground, #212741);
   background-color: var(--color-accent-2, #ff511a);
   padding: 12px 30px;
   display: inline-block;
   border-radius: 5px;
-  font-weight: 500;
+  font-weight: bold /*500*/;
   text-transform: capitalize;
   letter-spacing: calc(var(--size-general, 14px) / 28);
   border: none;

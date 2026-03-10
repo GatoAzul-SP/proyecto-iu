@@ -330,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			} catch(e) { console.warn('Error actualizando entrada de color', e); }
 		} else if (action === 'eliminar') {
 			if (entry.active) {
-				alert('Esta entrada está en uso y no se puede eliminar.);
+				alert('Esta entrada está en uso y no se puede eliminar.');
 				return;
 			}
 			showColorDeleteConfirmation(index);
@@ -959,7 +959,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					return `'${customName}', sans-serif`;
 				}
 				// Inject Google font into admin document
-				injectGoogleFontInDoc(document, f);
+				injectGoogleFont(document, f);
 				return `'${f}', sans-serif`;
 			};
 

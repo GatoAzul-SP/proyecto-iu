@@ -54,7 +54,7 @@
           <h6>Registrarse</h6>
           <h4>Crea una nueva cuenta</h4>
         </div>
-        <form id="create-account" class="form" #registerForm="ngForm" action="#" method="post">
+        <form id="create-account" class="form" #registerForm="ngForm" (ngSubmit)="handleRegister($event)" action="#" method="post">
           <div class="row">
             <div class="col-md-6">
               <label for="firstName">Nombre</label>

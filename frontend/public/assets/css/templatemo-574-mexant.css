@@ -240,6 +240,14 @@ section {
   margin-top: 30px;
 }
 
+.card {
+  border-radius: 15px;
+  padding: 50px;
+  background-color: var(--color-background, #fff);
+  position: relative;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
 
 /*
 ---------------------------------------------
@@ -1661,6 +1669,32 @@ page heading
   border-radius: 3px;
   background-color: var(--color-background, #fff);
   margin: 20px auto 0 auto;
+}
+
+
+
+/*
+---------------------------------------------
+login page
+---------------------------------------------
+*/
+
+.login {
+  padding: 50px;
+}
+
+.login > * {
+  margin: auto;
+  max-width: 100ch;
+}
+
+.login .naccs .menu {
+  text-align: center;
+}
+
+.invalid-feedback {
+  color: #d9534f;
+  margin-top: 6px;
 }
 
 

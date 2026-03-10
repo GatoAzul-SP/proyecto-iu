@@ -6,6 +6,7 @@ import { DOCUMENT } from "@angular/common";
 })
 export class ExternalHiddenContentService {
 	protected container: Element;
+	protected readonly commonElements: Record<string, Element> = Object.create(null);
 	private _failed = false;
 
 	constructor() {
@@ -18,11 +19,16 @@ export class ExternalHiddenContentService {
 			return;
 		}
 
-		this.container.parentNode?.removeChild(this.container);
+		this.container.parentNode && this.container.parentNode.removeChild(this.container);
 		document.body.appendChild(this.container);
+
+		const customScript: HTMLScriptElement = document.createElement("script");
+		customScript.src = "assets/js/custom.js";
+		this.commonElements["customScript"] = customScript;
 	}
 
-	append(node: Node) {
+	append(node: Node | string) {
+		if (typeof node === "string") node = this.getCommonElement(node);
 		this.container.appendChild(node);
 	}
 
@@ -30,7 +36,8 @@ export class ExternalHiddenContentService {
 		return this.container.childNodes;
 	}
 
-	remove(node: Node) {
+	remove(node: Node | string) {
+		if (typeof node === "string") node = this.getCommonElement(node);
 		try {
 			this.container.removeChild(node);
 		} catch (e) {
@@ -42,6 +49,12 @@ export class ExternalHiddenContentService {
 
 	clear() {
 		this.container.innerHTML = "";
+	}
+
+	protected getCommonElement(name: string): Element {
+		const element = this.commonElements[name];
+		if (!element) throw new Error("No existe un elemento común con ese nombre: " + name);
+		return element;
 	}
 
 	private _throwError() {

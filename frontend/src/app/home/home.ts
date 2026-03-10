@@ -47,7 +47,7 @@ export class Home implements OnDestroy {
 			},
 			Testimonials: "#testimonials"
 		},
-		button: {"Contact Support": "contact-us.html"}
+		button: {"Iniciar Sesión": "login"}
 	});
 
 	private _interleaveOffset = 0.5;
@@ -148,23 +148,18 @@ export class Home implements OnDestroy {
 	protected readonly partnerLogos = signal<string[]>(Array(6).fill("assets/images/client-01.png"));
 
 	protected readonly extHidContentSvc = inject(ExternalHiddenContentService);
-	protected readonly customScript: HTMLScriptElement;
 
 	constructor() {
-		const document = inject(DOCUMENT);
-		this.customScript = document.createElement("script");
-		this.customScript.src = "assets/js/custom.js";
-
 		if (this.tableTitles().length != this.tables.length) {
 			throw new Error("tables and their titles are not the same in quantity");
 		}
 
 		afterNextRender(() => {
-			this.extHidContentSvc.append(this.customScript);
+			this.extHidContentSvc.append("customScript");
 		});
 	}
 
 	ngOnDestroy() {
-		this.extHidContentSvc.remove(this.customScript);
+		this.extHidContentSvc.remove("customScript");
 	}
 }

@@ -1,0 +1,104 @@
+<!--<app-login>-->
+  <div class="naccs">
+    <div class="menu">
+      <div class="gradient-border active">
+        <span>Iniciar sesión</span>
+      </div>
+      <div class="gradient-border">
+        <span>Registrarse</span>
+      </div>
+    </div>
+    <li class="nacc-item active">
+      <div class="card">
+        <div class="section-heading">
+          <h6>Iniciar Sesión</h6>
+          <h4>Accede a tu cuenta</h4>
+        </div>
+        <form id="login" class="form" #loginForm="ngForm" (ngSubmit)="handleLogin($event)" action="#" method="post">
+          <div class="row">
+            <div class="col-12">
+              <label for="loginEmail">Correo Electrónico</label>
+              <input type="email" id="loginEmail" ngModel="" #loginEmail="ngModel"
+                name="email" email="" required="" aria-describedby="loginEmailFeedback">
+              <div id="loginEmailFeedback" class="invalid-feedback" [class.is-invalid]="!loginEmailValid()"
+                [ariaInvalid]="!loginEmailValid()" [style.display]="loginEmailValid() ? 'none' : 'block'"
+                >Por favor ingresa un correo válido (ej: usuario@dominio.com).</div>
+            </div>
+            <div class="col-12">
+              <label for="loginPassword">Contraseña</label>
+              <input type="password" id="loginPassword" ngModel="" name="password" required="">
+            </div>
+            <div class="col-12">
+              <label for="loginRole">Tipo de Usuario</label>
+              <select id="loginRole" ngModel="normal" name="role" class="form-select">
+                <option value="normal" selected="">Normal</option>
+                <option value="admin">Administrador</option>
+              </select>
+            </div>
+            <div id="loginError" class="col-12" [style.display]="loginErrorMsg() ? 'block' : 'none'">
+              <div class="alert alert-danger py-2 mb-0">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <span id="loginErrorText">{{ loginErrorMsg() }}</span>
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="secondary-button">Iniciar Sesión</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </li>
+    <li class="nacc-item">
+      <div class="card">
+        <div class="section-heading">
+          <h6>Registrarse</h6>
+          <h4>Crea una nueva cuenta</h4>
+        </div>
+        <form id="create-account" class="form" #registerForm="ngForm" action="#" method="post">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="firstName">Nombre</label>
+              <input type="text" id="firstName" ngModel="" name="firstName" required="">
+            </div>
+            <div class="col-md-6">
+              <label for="lastName">Apellido</label>
+              <input type="text" id="lastName" ngModel="" name="lastName" required="">
+            </div>
+            <div class="col-12">
+              <label for="registerEmail">Correo Electrónico</label>
+              <input type="email" id="registerEmail" ngModel="" #registerEmail="ngModel"
+                name="email" email="" required="" aria-describedby="registerEmailFeedback">
+              <div id="registerEmailFeedback" class="invalid-feedback"  [class.is-invalid]="!registerEmailValid()"
+                [ariaInvalid]="!registerEmailValid()" [style.display]="registerEmailValid() ? 'none' : 'block'"
+                >Por favor ingresa un correo válido (ej: usuario@dominio.com).</div>
+            </div>
+            <div class="col-md-6">
+              <label for="registerPassword">Contraseña</label>
+              <input type="password" id="registerPassword" ngModel="" name="password1" required="">
+            </div>
+            <div class="col-md-6">
+              <label for="confirmPassword">Confirmar Contraseña</label>
+              <input type="password" id="confirmPassword" ngModel="" name="password2" required="">
+            </div>
+            <div class="col-12">
+              <label for="registerRole">Tipo de Usuario</label>
+              <select id="registerRole" ngModel="normal" name="role" class="form-select">
+                <option value="normal" selected="">Normal</option>
+                <option value="admin">Administrador</option>
+              </select>
+            </div>
+            <div id="registerError" class="col-12" [style.display]="registerErrorMsg() ? 'block' : 'none'">
+              <div class="alert alert-danger py-2 mb-0">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <span id="registerErrorText">{{ registerErrorMsg() }}</span>
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="primary-button">Crear Cuenta</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </li>
+  </div>
+<!--</app-login>-->

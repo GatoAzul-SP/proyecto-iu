@@ -4,6 +4,21 @@ var FONT_DB_NAME = "CustomFontsDB";
 var FONT_DB_VER = 1;
 var FONT_STORE_NAME = "fonts";
 
+var getElById = document.getElementById.bind(document);
+var createEl = document.createElement.bind(document);
+
+function reversedMap(simpleMap) {
+	const reversed = {__proto__: null};
+	Object.entries(simpleMap).forEach(pair => {
+		if (pair[1] != null) reversed[pair[1]] = pair[0];
+	});
+	return reversed;
+}
+
+function reflexedMap(simpleMap) {
+	return Object.assign({__proto__: null}, simpleMap, reversedMap(simpleMap));
+}
+
 function isOnAdmin() {
 	const path = (window.location && window.location.pathname) ? window.location.pathname : "";
 	const test = /^\/admin\//i.test(path);
@@ -55,6 +70,26 @@ function storeDBObject(store, key, obj) {
 	});
 }
 
+function bcChannelPost(channelName, message) {
+	if (window.BroadcastChannel) {
+		const channel = new BroadcastChannel(channelName);
+		channel.postMessage(message);
+		channel.close();
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function bcChannelListen(channelName, handler) {
+	if (window.BroadcastChannel) {
+		const channel = new BroadcastChannel(channelName);
+		if (handler) {
+			channel.addEventListener("message", handler);
+		}
+		return channel;
+	}
+}
 
 function openFontDB() {
 	return openDB(FONT_DB_NAME, 1, e => {
@@ -212,20 +247,16 @@ if (!isOnAdmin()) {
 	applySiteFonts(document.body);
 
 	try {
-		if (window.BroadcastChannel) {
-			const bcColors = new BroadcastChannel("admin-colors");
-			bcColors.addEventListener("message", function(ev) {
-				if (ev.data && ev.data.type === "colors-applied" && ev.data.colors) {
-					applySiteColors(document.body, ev.data.colors);
-				}
-			});
+		bcChannelListen("admin-colors", function(ev) {
+			if (ev.data && ev.data.type === "colors-applied" && ev.data.colors) {
+				applySiteColors(document.body, ev.data.colors);
+			}
+		});
 
-			const bcFonts = new BroadcastChannel("admin-typography");
-			bcFonts.addEventListener("message", function(ev) {
-				if (ev.data && ev.data.type === "settings-applied" && ev.data.settings) {
-					applySiteFonts(document.body, ev.data.settings);
-				}
-			});
-		}
+		bcChannelListen("admin-typography", function(ev) {
+			if (ev.data && ev.data.type === "settings-applied" && ev.data.settings) {
+				applySiteFonts(document.body, ev.data.settings);
+			}
+		});
 	} catch (e) {}
 }

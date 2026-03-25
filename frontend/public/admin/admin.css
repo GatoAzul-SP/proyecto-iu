@@ -2,12 +2,59 @@
     --color-accent-1: #1B73E8;
     --color-accent-2: #34A853;
     --color-foreground: #FBBC05;
-    --danger-color: #EA4335;
+    --danger-color: #E53935;
     --dark-color: #202124;
     --light-color: #F8F9FA;
     --gray-color: #5F6368;
     --border-color: #DADCE0;
     --sidebar-width: 250px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #F5F7FA;
+    color: var(--dark-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.context-menu {
+    position: absolute;
+    z-index: 9999;
+    background: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    padding: 6px 0;
+    min-width: 140px;
+    display: block;
+}
+
+/*
+.context-menu[hidden] {
+    display: none;
+}
+*/
+
+.context-menu > li {
+    display: block;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.context-menu > li:hover {
+    background-color: #f0f0f0;
+}
+
+.context-menu > li.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 /* Context menu for typography table */
@@ -63,20 +110,25 @@
 /* Confirmation modal */
 .admin-confirm-overlay {
     position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.45);
-    display: none;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 20000;
+    background: rgba(0, 0, 0, 0.36);
 }
+
 .admin-confirm {
     background: #fff;
-    padding: 20px 22px;
+    color: #111;
+    padding: 20px;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    width: 420px;
-    max-width: calc(100% - 40px);
+    width: 90%;
+    max-width: 520px;
     text-align: left;
 }
 
@@ -93,45 +145,84 @@
 .admin-confirm .confirm-actions {
     display: flex;
     gap: 10px;
-    justify-content: flex-end
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+.btn-confirm, .btn-cancel {
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .btn-confirm {
-    background: var(--danger-color);
+    background: #1B73E8;
     color: #fff;
     border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer
+}
+
+.btn-confirm.dangerous {
+    background: var(--danger-color);
 }
 
 .btn-cancel {
-    background: transparent;
+    background: #f0f0f0;
     border: 1px solid var(--border-color);
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer
+}
+
+.palette-preview {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.palette-preview .color-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.typography-apply-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 16px 0;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+#typography-edit-modal label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+#typography-edit-modal input,
+#typography-edit-modal select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#typo-edit-error {
+    display: none;
+    background: #ffe0e0;
+    color: #c62828;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    border: 1px solid #ef9a9a;
 }
 
 /* small animation */
 .admin-confirm.show {
     transform: translateY(0);
     opacity: 1;
-}
-
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #F5F7FA;
-    color: var(--dark-color);
-    line-height: 1.6;
-    overflow-x: hidden;
 }
 
 .admin-container {
@@ -450,6 +541,7 @@ body {
     width: 70px;
     height: 70px;
     border: 3px solid white;
+    background-color: white;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     flex-shrink: 0;
@@ -553,13 +645,13 @@ body {
     vertical-align: middle;
 }
 
-#colors-changes table td .color-wrapper {
+#colors-changes tbody td .color-wrapper {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-#colors-changes table td .color-swatch {
+#colors-changes tbody td .color-swatch {
     display: inline-block;
     width: 20px;
     height: 20px;

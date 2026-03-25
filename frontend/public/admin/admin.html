@@ -117,42 +117,42 @@
                 <div class="colors-grid">
                     <div class="color-item">
                         <div class="color-item-top">
-                            <input type="color" id="color-1" value="#43ba7f">
+                            <input type="color" id="color-1" value="#fd18c0">
                             <div class="color-desc">
                                 <h4>Acento 1</h4>
                                 <p>Color principal de resaltado</p>
                             </div>
                         </div>
                         <div class="color-item-bottom">
-                            <input type="text" id="color-1-hex" value="#43ba7f">
+                            <input type="text" id="color-1-hex" value="#fd18c0">
                             <button class="btn-reset">Restablecer</button>
                         </div>
                     </div>
 
                     <div class="color-item">
                         <div class="color-item-top">
-                            <input type="color" id="color-2" value="#ff511a">
+                            <input type="color" id="color-2" value="#cb69f2">
                             <div class="color-desc">
                                 <h4>Acento 2</h4>
                                 <p>Color de resaltado secundario</p>
                             </div>
                         </div>
                         <div class="color-item-bottom">
-                            <input type="text" id="color-2-hex" value="#ff511a">
+                            <input type="text" id="color-2-hex" value="#cb69f2">
                             <button class="btn-reset">Restablecer</button>
                         </div>
                     </div>
 
                     <div class="color-item">
                         <div class="color-item-top">
-                            <input type="color" id="color-3" value="#212741">
+                            <input type="color" id="color-3" value="#000000">
                             <div class="color-desc">
                                 <h4>Texto</h4>
                                 <p>Color del texto y fondos invertidos</p>
                             </div>
                         </div>
                         <div class="color-item-bottom">
-                            <input type="text" id="color-3-hex" value="#212741">
+                            <input type="text" id="color-3-hex" value="#000000">
                             <button class="btn-reset">Restablecer</button>
                         </div>
                     </div>
@@ -195,13 +195,13 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Tipo</th>
+                                    <th>Nombre</th>
                                     <th>Acento 1</th>
                                     <th>Acento 2</th>
                                     <th>Texto</th>
                                     <th>Fondo</th>
                                     <th>Fondo sombra</th>
-                                    <th>Activa</th>
+                                    <th>Tipo</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -214,6 +214,47 @@
                 <div class="form-actions">
                     <!--<button class="btn-secondary">Cancelar</button>-->
                     <button class="btn-primary" id="apply-colors">Aplicar Cambios</button>
+                </div>
+
+                <div id="color-delete-modal" class="admin-confirm-overlay" hidden="">
+                    <div class="admin-confirm" role="dialog" aria-modal="true">
+                        <h3>Eliminar Paleta de Colores</h3>
+                        <p>¿Estás seguro de que deseas eliminar esta paleta de colores?</p>
+                        <div class="confirm-actions">
+                            <button class="btn-cancel">Cancelar</button>
+                            <button class="btn-confirm dangerous">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="color-edit-modal" class="admin-confirm-overlay" hidden="">
+                    <div class="admin-confirm" role="dialog" aria-modal="true">
+                        <h3>Editar Paleta de Colores</h3>
+                        <p>Ingresa un nuevo nombre para esta paleta:</p>
+                        <input type="text" id="edit-palette-name" class="form-control" placeholder="Nombre de la paleta" style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 6px;">
+                        <div class="confirm-actions">
+                            <button class="btn-cancel">Cancelar</button>
+                            <button class="btn-confirm">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="color-apply-modal" class="admin-confirm-overlay" hidden="">
+                    <div class="admin-confirm" role="dialog" aria-modal="true">
+                        <h3>Aplicar Paleta de Colores</h3>
+                        <p>¿Estás seguro de que deseas aplicar esta paleta de colores?</p>
+                        <div class="palette-preview">
+                            <div class="color-swatch" data-color="accent-1"></div>
+                            <div class="color-swatch" data-color="accent-2"></div>
+                            <div class="color-swatch" data-color="foreground"></div>
+                            <div class="color-swatch" data-color="background"></div>
+                            <div class="color-swatch" data-color="background-shadowed"></div>
+                        </div>
+                        <div class="confirm-actions">
+                            <button class="btn-cancel">Cancelar</button>
+                            <button class="btn-confirm">Aplicar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -257,8 +298,8 @@
                             <h4>Tamaño de Títulos</h4>
                             <p>Tamaño de los títulos (px)</p>
                             <div class="size-control">
-                                <input type="range" id="title-size" min="12" max="100" value="32" step="1">
-                                <span id="title-size-value">32px</span>
+                                <input type="range" id="title-size" min="12" max="100" value="36" step="1">
+                                <span id="title-size-value">36px</span>
                             </div>
                         </div>
 
@@ -286,7 +327,7 @@
                         <div class="typography-item">
                             <h4>Importar Fuente</h4>
                             <div class="font-upload-section">
-                                <input type="file" id="font-file-input" accept=".ttf,.otf,.woff,.woff2" hidden>
+                                <input type="file" id="font-file-input" accept=".ttf,.otf,.woff,.woff2" hidden="">
                                 <button class="btn-upload" id="btn-upload-font">
                                     <i class="fas fa-upload"></i> Subir Fuente
                                 </button>
@@ -319,7 +360,6 @@
                                     <th>Tamaño de Títulos</th>
                                     <th>Tamaño de Subtítulos</th>
                                     <th>Tamaño de Párrafos</th>
-                                    <th>Fecha / Hora</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -330,8 +370,73 @@
                 </div>
 
                 <div class="form-actions">
-                    <!--<button class="btn-secondary">Cancelar</button>-->
+                    <button class="btn-secondary">Cancelar</button>
                     <button class="btn-primary" id="apply-typography">Aplicar Cambios</button>
+                </div>
+
+                <div id="typography-delete-modal" class="admin-confirm-overlay" hidden="">
+                    <div class="admin-confirm" role="dialog" aria-modal="true">
+                        <h3>Eliminar Ajustes de Tipografía</h3>
+                        <p>¿Estás seguro de que deseas eliminar esta entrada del historial? Esta acción no se puede deshacer.</p>
+                        <div class="confirm-actions">
+                            <button class="btn-cancel">Cancelar</button>
+                            <button class="btn-confirm dangerous">Eliminar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="typography-edit-modal" class="admin-confirm-overlay" hidden="">
+                    <div class="admin-confirm" role="dialog" aria-modal="true">
+                        <h3>Editar Ajustes de Tipografía</h3>
+                        <div style="margin: 16px 0;">
+                            <label>Fuente Principal:</label>
+                            <select id="typo-edit-primary"></select>
+                        </div>
+                        <div style="margin: 16px 0;">
+                            <label>Fuente Secundaria:</label>
+                            <select id="typo-edit-secondary"></select>
+                        </div>
+                        <div style="margin: 16px 0;">
+                            <label>Tamaño Títulos (px):</label>
+                            <input type="number" id="typo-edit-title" min="12" max="100">
+                        </div>
+                        <div style="margin: 16px 0;">
+                            <label>Tamaño Subtítulos (px):</label>
+                            <input type="number" id="typo-edit-subtitle" min="12" max="100">
+                        </div>
+                        <div style="margin: 16px 0;">
+                            <label>Tamaño Párrafos (px):</label>
+                            <input type="number" id="typo-edit-paragraph" min="12" max="100">
+                        </div>
+                        <div id="typo-edit-error">⚠️ Los tamaños deben estar entre 12px y 100px.</div>
+                        <div class="confirm-actions">
+                            <button class="btn-cancel">Cancelar</button>
+                            <button class="btn-confirm">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="typography-apply-modal" class="admin-confirm-overlay" hidden="">
+                    <div class="admin-confirm" role="dialog" aria-modal="true">
+                        <h3>Aplicar Ajustes de Tipografía</h3>
+                        <p>¿Deseas aplicar esta configuración de tipografía al sitio?</p>
+                        <div class="typography-apply-preview">
+                            <div><strong>Fuente de Títulos:</strong>
+                                <span class="font-name" data-name="primary"></span></div>
+                            <div><strong>Fuente de Subtítulos:</strong>
+                                <span class="font-name" data-name="secondary"></span></div>
+                            <div><strong>Tamaño de Títulos:</strong>
+                                <span class="font-size" data-size="titleSize"></span></div>
+                            <div><strong>Tamaño de Subtítulos:</strong>
+                                <span class="font-size" data-size="subtitleSize"></span></div>
+                            <div><strong>Tamaño de Párrafos:</strong>
+                                <span class="font-size" data-size="paragraphSize"></span></div>
+                        </div>
+                        <div class="confirm-actions">
+                            <button class="btn-cancel">Cancelar</button>
+                            <button class="btn-confirm">Aplicar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -416,6 +521,9 @@
             </div>
         </div>
     </div> -->
+
+    <menu id="color-context-menu" class="context-menu" hidden=""></menu>
+    <menu id="typography-context-menu" class="context-menu" hidden=""></menu>
 
 <!-- Scripts -->
     <script src="../vendor/jquery/jquery.min.js"></script>

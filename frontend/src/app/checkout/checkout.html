@@ -1,0 +1,117 @@
+<!--<app-checkout>-->
+<header class="header-area" [links]="headerLinks"></header>
+<div class="page-heading">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="header-text">
+          <h2>Finalizar Compra</h2>
+          <div class="div-dec"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="checkout-section">
+  <div class="container">
+    @if (cartItems().length === 0) {
+      <div class="empty-checkout text-center py-5 my-5">
+        <i class="fas fa-shopping-basket mb-4" style="font-size: 60px; color: #ccc;"></i>
+        <h3>No tiene Servicios/Productos agregados al carrito</h3>
+        <p class="text-muted mt-2 mb-4">Agrega algunos artículos a tu lista para poder continuar con el pago.</p>
+        <button class="btn btn-primary primary-button mt-3 px-5 py-3" routerLink="/">
+          Volver a la tienda
+        </button>
+      </div>
+    } @else {
+      <div class="row">
+        <!-- Columna Izquierda: Lista de Productos -->
+        <div class="col-lg-8">
+          <div class="checkout-card mb-4">
+            <h4 class="mb-4">Artículos en tu carrito ({{ cartCount() }})</h4>
+            <div class="checkout-items-list">
+              @for (item of cartItems(); track item.id) {
+                <div class="checkout-item row align-items-center mb-4 pb-3 border-bottom">
+                  <div class="col-md-2 col-4">
+                    <img [src]="item.image" [alt]="item.title" class="img-fluid rounded">
+                  </div>
+                  <div class="col-md-6 col-8">
+                    <h5 class="mb-1">{{ item.title }}</h5>
+                    <span class="text-muted d-block mb-2">Precio unitario: ${{ item.price | number:'1.2-2' }}</span>
+                    <button class="btn btn-sm btn-outline-danger" (click)="removeItem(item.id)">
+                      <i class="fas fa-trash-alt me-1"></i> Eliminar
+                    </button>
+                  </div>
+                  <div class="col-md-4 col-12 text-md-end text-start mt-3 mt-md-0 d-flex flex-column align-items-md-end">
+                    <div class="checkout-quantity-selector d-flex align-items-center mb-1">
+                      <span class="text-muted fw-bold me-2">Cant:</span>
+                      <button class="btn btn-sm btn-outline-secondary px-2 py-0 fs-5" (click)="updateItemQuantity(item.id, item.quantity - 1)">-</button>
+                      <span class="px-3 border mx-1 rounded" style="background:var(--color-background-shadowed, #fdfdfd);">{{ item.quantity }}</span>
+                      <button class="btn btn-sm btn-outline-secondary px-2 py-0 fs-5" (click)="updateItemQuantity(item.id, item.quantity + 1)">+</button>
+                    </div>
+                    <h5 class="text-primary-color mt-2 fw-bold">${{ (item.price * item.quantity) | number:'1.2-2' }}</h5>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Resumen -->
+        <div class="col-lg-4">
+          <div class="checkout-summary-card sticker-card">
+            <h4 class="mb-4">Resumen de Compra</h4>
+            
+            <div class="mb-3 pb-3 border-bottom">
+              @for (item of cartItems(); track item.id) {
+                <div class="d-flex justify-content-between align-items-center mb-2" style="font-size: 0.95rem;">
+                  <span class="text-muted text-truncate me-2" style="max-width: 70%;" title="{{ item.title }}">{{ item.title }} (x{{ item.quantity }})</span>
+                  <strong>${{ (item.price * item.quantity) | number:'1.2-2' }}</strong>
+                </div>
+              }
+            </div>
+
+            <div class="d-flex justify-content-between mb-2 mt-2">
+              <span class="fs-6 text-muted">Subtotal</span>
+              <span class="fs-6 text-muted">${{ cartSubtotal() | number:'1.2-2' }}</span>
+            </div>
+
+            @if (activeCoupon()) {
+              <div class="d-flex justify-content-between mb-3 align-items-center" style="color: var(--color-accent-1, #43ba7f);">
+                <span><i class="fas fa-tag"></i> Descuento ({{ activeCoupon() }})
+                  <button class="btn btn-sm text-danger p-0 ms-2" title="Eliminar cupón" (click)="handleRemoveCoupon()"><i class="fas fa-times-circle"></i></button></span>
+                <span>-${{ cartDiscount() | number:'1.2-2' }}</span>
+              </div>
+            } @else {
+              <div class="coupon-section mb-3">
+                <form class="input-group" (ngSubmit)="handleApplyCoupon()" #couponForm="ngForm">
+                  <input type="text" class="form-control text-uppercase" placeholder="Código de cupón" [ngModel]="couponInput()" (ngModelChange)="couponInput.set($event)" name="code">
+                  <button class="btn btn-outline-secondary" type="submit" [disabled]="!couponInput().trim()">Aplicar</button>
+                </form>
+                @if (couponError()) {
+                  <small class="text-danger mt-1 d-block"><i class="fas fa-info-circle"></i> {{ couponError() }}</small>
+                }
+              </div>
+            }
+
+            <div class="d-flex justify-content-between mb-4 mt-2 border-top pt-3">
+              <span class="fs-5 fw-bold">Total a Pagar</span>
+              <span class="fs-4 fw-bold text-primary-color">${{ cartTotal() | number:'1.2-2' }}</span>
+            </div>
+
+            <button routerLink="/payment" class="primary-button checkout-pay-btn w-100 py-3 d-flex justify-content-center align-items-center gap-2">
+              <i class="fas fa-lock"></i> Pagar Seguro
+            </button>
+            <div class="secure-checkout-info text-center mt-3 text-muted" style="font-size: 0.8rem;">
+              <i class="fas fa-shield-alt"></i> Tu transacción es 100% segura y encriptada.
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>
+
+<footer></footer>
+<!--</app-checkout>-->

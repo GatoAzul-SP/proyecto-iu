@@ -28,13 +28,7 @@
               <label for="loginPassword">Contraseña</label>
               <input type="password" id="loginPassword" ngModel="" name="password" required="">
             </div>
-            <div class="col-12">
-              <label for="loginRole">Tipo de Usuario</label>
-              <select id="loginRole" ngModel="normal" name="role" class="form-select">
-                <option value="normal" selected="">Normal</option>
-                <option value="admin">Administrador</option>
-              </select>
-            </div>
+
             <div id="loginError" class="col-12" [style.display]="loginErrorMsg() ? 'block' : 'none'">
               <div class="alert alert-danger py-2 mb-0">
                 <i class="fas fa-exclamation-circle me-2"></i>
@@ -80,13 +74,7 @@
               <label for="confirmPassword">Confirmar Contraseña</label>
               <input type="password" id="confirmPassword" ngModel="" name="password2" required="">
             </div>
-            <div class="col-12">
-              <label for="registerRole">Tipo de Usuario</label>
-              <select id="registerRole" ngModel="normal" name="role" class="form-select">
-                <option value="normal" selected="">Normal</option>
-                <option value="admin">Administrador</option>
-              </select>
-            </div>
+
             <div id="registerError" class="col-12" [style.display]="registerErrorMsg() ? 'block' : 'none'">
               <div class="alert alert-danger py-2 mb-0">
                 <i class="fas fa-exclamation-circle me-2"></i>

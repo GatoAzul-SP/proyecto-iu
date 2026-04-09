@@ -1,0 +1,96 @@
+<header class="header-area" [links]="{ links: { 'Inicio': '/' } }"></header>
+
+<div class="page-heading">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="header-text">
+          <h2>Mi Perfil</h2>
+          <div class="div-dec"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="profile-section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card sticker-card text-start border-0">
+          <h4 class="mb-4">Información de Facturación</h4>
+          <form class="form" #profileForm="ngForm" (ngSubmit)="handleSave(profileForm)">
+            
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label class="form-label text-muted fw-bold">Nombre / Razón Social</label>
+                <input type="text" class="form-control" name="firstName" [ngModel]="userProfile().firstName" (ngModelChange)="userProfile().firstName = $event" required placeholder="Tu nombre">
+              </div>
+              <div class="col-md-6 mt-3 mt-md-0">
+                <label class="form-label text-muted fw-bold">Apellido</label>
+                <input type="text" class="form-control" name="lastName" [ngModel]="userProfile().lastName" (ngModelChange)="userProfile().lastName = $event" placeholder="Tu apellido">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-12">
+                <label class="form-label text-muted fw-bold">Documento de Identidad (Cédula/RIF/Pasaporte)</label>
+                <div class="input-group">
+                  <select class="form-select text-center" style="max-width: 80px;" name="docType" [ngModel]="userProfile().docType" (ngModelChange)="userProfile().docType = $event">
+                    <option value="V">V</option>
+                    <option value="E">E</option>
+                    <option value="J">J</option>
+                    <option value="G">G</option>
+                    <option value="P">P</option>
+                  </select>
+                  <input type="text" class="form-control" name="documentId" [ngModel]="userProfile().documentId" (ngModelChange)="userProfile().documentId = $event" required placeholder="Ej. 12345678">
+                </div>
+                <div class="form-text">Si eres persona natural, introduce tu número de Cédula o Pasaporte.</div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label class="form-label text-muted fw-bold">Teléfono de Contacto</label>
+                <input type="text" class="form-control" name="phone" [ngModel]="userProfile().phone" (ngModelChange)="userProfile().phone = $event" required placeholder="Ej. 0414 123 4567">
+              </div>
+              <div class="col-md-6 mt-3 mt-md-0">
+                <label class="form-label text-muted fw-bold">Correo Electrónico</label>
+                <input type="email" class="form-control" name="email" [ngModel]="userProfile().email" readonly style="background-color: var(--color-background-shadowed, #f7f7f7); opacity: 0.7;">
+                <div class="form-text">El correo está vinculado a la cuenta y no se puede editar.</div>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-12">
+                <label class="form-label text-muted fw-bold">Domicilio Fiscal / Dirección</label>
+                <textarea class="form-control" rows="3" name="address" [ngModel]="userProfile().address" (ngModelChange)="userProfile().address = $event" required placeholder="Ingresa tu dirección completa de facturación o envío"></textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                @if (errorMsg()) {
+                  <div class="alert alert-danger mb-4 py-2">
+                    <i class="fas fa-exclamation-circle me-2"></i> {{ errorMsg() }}
+                  </div>
+                }
+                @if (saved()) {
+                  <div class="alert alert-success mb-4 py-2 border-0" style="background-color: var(--color-accent-1, #43ba7f); color: white;">
+                    <i class="fas fa-check-circle me-2"></i> {{ successMsg() }}
+                  </div>
+                }
+                <button type="submit" class="primary-button w-100 py-3" [disabled]="saved()">
+                  <i class="fas fa-save me-2"></i> Guardar Datos
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer></footer>

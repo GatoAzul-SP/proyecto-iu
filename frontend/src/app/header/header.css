@@ -1,0 +1,365 @@
+/* =============================================
+   Header — White background + logo sizing
+   ============================================= */
+
+/* Force the header bar to be white at ALL times */
+:host {
+  background-color: #fff !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Also when the sticky JS class is added */
+:host.background-header {
+  background-color: #fff !important;
+}
+
+/* Logo: always fits WITHIN the header, never pushes it */
+.main-nav .logo {
+  display: flex;
+  align-items: center;
+  line-height: normal !important;
+  float: left;
+}
+
+.main-nav .logo img {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+  transition: height 0.3s ease;
+}
+
+/* When header shrinks on scroll (background-header = 80px) */
+:host.background-header .main-nav .logo img {
+  height: 70px;
+}
+
+/* Since the header is now white, nav links need dark color */
+.main-nav .nav li a {
+  color: #333 !important;
+}
+
+.main-nav .nav li a:hover,
+.main-nav .nav li a.active {
+  color: var(--color-accent-2, #cb69f2) !important;
+}
+
+
+/* Header icon styles */
+.header-icon {
+  display: flex;
+  align-items: center;
+}
+
+.header-icon .icon-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  padding: 0 8px !important;
+  color: #333 !important;
+  transition: color 0.3s ease;
+}
+
+.header-icon .icon-link:hover {
+  color: var(--color-accent-2, #cb69f2) !important;
+}
+
+.icon-badge {
+  position: absolute;
+  top: -6px;
+  right: 0;
+  background: #e74c3c;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  min-width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 50%;
+  padding: 0 3px;
+}
+
+/* Mobile hamburger menu — dark lines for white background */
+.main-nav .menu-trigger span,
+.main-nav .menu-trigger span:before,
+.main-nav .menu-trigger span:after {
+  background-color: #333 !important;
+}
+
+/* =============================================
+   Account icon dropdown
+   ============================================= */
+.account-icon-wrap {
+  position: relative;
+}
+
+.account-icon-wrap .icon-link {
+  font-size: 25px !important;
+  padding: 12px 22px !important;
+  background-color: var(--color-accent-1, #fd18c0) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  transition: opacity 0.3s ease;
+}
+
+.account-icon-wrap .icon-link:hover {
+  opacity: 0.85;
+}
+
+.account-dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  min-width: 190px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 9999;
+  animation: dropdownFadeIn 0.18s ease;
+}
+
+@keyframes dropdownFadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* The small arrow pointing upward */
+.account-dropdown-arrow {
+  position: absolute;
+  top: -8px;
+  right: 14px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #fff;
+  filter: drop-shadow(0 -2px 2px rgba(0,0,0,0.08));
+}
+
+.account-btn {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px !important;
+  border-radius: 8px;
+  font-size: 14px !important;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease !important;
+  cursor: pointer;
+}
+
+.login-btn {
+  color: #fd18c0 !important;
+  border: 1.5px solid #fd18c0;
+  background: transparent;
+}
+
+.login-btn:hover {
+  background: #fd18c0 !important;
+  color: #fff !important;
+}
+
+.register-btn {
+  color: #fff !important;
+  background: var(--color-accent-1, #fd18c0);
+  border: 1.5px solid transparent;
+}
+
+.register-btn:hover {
+  background: #cb069a !important;
+  color: #fff !important;
+}
+
+/* User info styles when logged in */
+.account-user-info {
+  text-align: center;
+  padding: 10px 5px;
+}
+
+.account-user-info .user-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 4px 0;
+}
+
+.account-user-info .user-email {
+  font-size: 0.85rem;
+  color: #777;
+  margin: 0;
+  word-break: break-all;
+}
+
+.dropdown-divider {
+  border-top: 1px solid #eee;
+  margin: 4px 0;
+}
+
+.logout-btn {
+  color: #e74c3c !important;
+  background: transparent;
+  border: 1.5px solid transparent;
+  justify-content: center;
+}
+
+.logout-btn:hover {
+  background: #fdf2f1 !important;
+  border-color: #fadbd8;
+}
+
+/* =============================================
+   Cart dropdown
+   ============================================= */
+.cart-icon-wrap {
+  position: relative;
+}
+
+.cart-dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: -50px;
+  width: 330px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+  animation: dropdownFadeIn 0.18s ease;
+  overflow: hidden;
+}
+
+.cart-items-list {
+  /* Height for roughly ~3.5 to 4 items */
+  max-height: 310px;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Custom scrollbar for cart */
+.cart-items-list::-webkit-scrollbar {
+  width: 6px;
+}
+.cart-items-list::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+.cart-items-list::-webkit-scrollbar-thumb {
+  background: #ccc; 
+  border-radius: 10px;
+}
+.cart-items-list::-webkit-scrollbar-thumb:hover {
+  background: #aaa; 
+}
+
+.empty-cart-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  color: #999;
+}
+.empty-cart-msg i {
+  font-size: 35px;
+  margin-bottom: 10px;
+  color: #ddd;
+}
+.empty-cart-msg p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: #fdfdfd;
+  border: 1px solid #eee;
+  transition: background 0.2s;
+}
+.cart-item:hover {
+  background: #f6f6f6;
+}
+
+.cart-item-img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-right: 12px;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+.cart-item-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 5px 0;
+  line-height: 1.2;
+}
+.cart-item-price {
+  font-size: 0.9rem;
+  color: var(--color-accent-1, #fd18c0);
+  font-weight: 700;
+}
+.cart-item-price small {
+  color: #777;
+  font-weight: normal;
+  margin-left: 4px;
+}
+
+.cart-item-remove {
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  padding: 5px 8px;
+  transition: color 0.2s;
+}
+.cart-item-remove:hover {
+  color: #e74c3c;
+}
+
+.cart-footer {
+  padding: 15px;
+  background: #f9f9f9;
+  border-top: 1px solid #eee;
+}
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.checkout-btn {
+  width: 100%;
+  text-align: center;
+  padding: 12px 0;
+  background-color: var(--color-accent-1, #fd18c0);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+.checkout-btn:hover {
+  opacity: 0.85;
+}

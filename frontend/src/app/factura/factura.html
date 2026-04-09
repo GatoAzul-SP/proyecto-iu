@@ -1,0 +1,110 @@
+<!-- Controles que NO se imprimen -->
+<div class="factura-controls-bar">
+    <button class="btn btn-outline-dark" (click)="printInvoice()">
+        <i class="fas fa-print me-2"></i> Imprimir Factura
+    </button>
+    <button class="btn" style="background-color: #fd18c0; color: white;" (click)="finishAndExit()">
+        <i class="fas fa-sign-out-alt me-2"></i> Finalizar y Volver
+    </button>
+</div>
+
+<div class="factura-wrapper">
+    <div class="factura-container">
+        <!-- Encabezado -->
+        <div class="header">
+            <div class="emisor-info">
+                <h2>Variedades y Peluquería LG, C.A.</h2>
+                <p><strong>RIF:</strong> J-12345678-9</p> 
+                <p><strong>Domicilio Fiscal:</strong> C.C. Fin de Siglo, San Diego, Estado Carabobo.</p> 
+            </div>
+            <div class="doc-info">
+                <h1>FACTURA</h1> 
+                <p><strong>N° de Factura:</strong> {{ facturaNumber }}</p> 
+                <p><strong>N° de Control:</strong> {{ controlNumber }}</p> 
+                <p><strong>Fecha de Emisión:</strong> {{ currentDate }}</p> 
+                <p><strong>Hora de Emisión:</strong> {{ currentTime }}</p> 
+            </div>
+        </div>
+
+        <!-- Información del Cliente -->
+        <div class="cliente-info">
+            <p><strong>Nombre/Razón Social:</strong> {{ clientName }}</p>
+            <p><strong>CI/RIF:</strong> {{ clientDoc }}</p>
+            <p><strong>Domicilio Fiscal:</strong> {{ clientAddress }}</p>
+        </div>
+
+        <!-- Tabla de Artículos Dinámica -->
+        <table class="factura-table">
+            <thead>
+                <tr>
+                    <th width="10%">Código</th>
+                    <th width="10%">Cant.</th>
+                    <th width="50%">Descripción</th>
+                    <th width="15%" class="text-right">Precio Unitario</th>
+                    <th width="15%" class="text-right">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of cartItems(); track item.id) {
+                    <tr>
+                        <td class="text-center">ITM-{{ item.id.substring(0, 4) | uppercase }}</td>
+                        <td class="text-center">{{ item.quantity }}</td>
+                        <td>{{ item.title }}</td>
+                        <td class="text-right">{{ (item.price / 1.16) | number:'1.2-2' }}</td>
+                        <td class="text-right">{{ ((item.price * item.quantity) / 1.16) | number:'1.2-2' }}</td>
+                    </tr>
+                }
+                @if(cartItems().length === 0) {
+                    <tr>
+                        <td colspan="5" class="text-center text-muted"><em>--- CARGANDO O SIN ELEMENTOS ---</em></td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="5"><em>* Nota: El servicio de tinte y otros técnicos incluyen la entrega de consumibles descartables de acuerdo a nuestra normativa local.</em></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Totales Reales -->
+        <div class="totales-container">
+            <table class="totales">
+                <tr>
+                    <td><strong>Sub-Total de Operaciones:</strong></td>
+                    <td class="text-right">{{ (cartSubtotal() / 1.16) | number:'1.2-2' }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Descuento promocional:</strong></td>
+                    <td class="text-right">{{ (cartDiscount() / 1.16) | number:'1.2-2' }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Monto Total Exento o Exonerado (E):</strong></td>
+                    <td class="text-right">0,00</td>
+                </tr>
+                <tr>
+                    <td><strong>Base Imponible (Servicios gravados):</strong></td>
+                    <td class="text-right">{{ baseImponible | number:'1.2-2' }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Impuesto al Valor Agregado (IVA) 16%:</strong></td>
+                    <td class="text-right">{{ ivaAmount | number:'1.2-2' }}</td>
+                </tr>
+                <tr>
+                    <td style="font-size: 16px;"><strong>VALOR TOTAL DE LA OPERACIÓN ($):</strong></td>
+                    <td class="text-right val-total" style="font-size: 16px;"><strong>{{ totalAmount | number:'1.2-2' }}</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Pie Legal -->
+        <div class="footer-legal">
+            <p><strong>Números de control asignados:</strong> desde el N° 00-000001 hasta el N° 00-001000</p> 
+            <p>
+                <strong>Imprenta Autorizada:</strong> Formatos y Sistemas Digitales C.A. | 
+                <strong>RIF:</strong> J-98765432-1 | 
+                <strong>Providencia SENIAT N°:</strong> 000123 de fecha 10/05/2015 
+            </p>
+            <p><strong>Fecha de asignación del número de control:</strong> 15022026</p> 
+        </div>
+
+    </div>
+</div>

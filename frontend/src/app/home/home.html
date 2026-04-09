@@ -4,307 +4,124 @@
 <div class="slideshow-banner" id="top" [config]="bannerOptions()">
   <div class="carousel-slide">
     <div class="slideshow-banner-slide" bgImg="assets/images/slide-01.jpg">
-      <h2>Get <em>ready</em> for your business<br>&amp; upgrade <em>all aspects</em></h2>
+      <h2>Los Mejores <em>Servicios</em><br>de <em>Peluquería</em></h2>
       <div class="div-dec"></div>
-      <p>Mexant HTML5 Template is provided for free of charge. This layout is based on Boostrap 5 CSS
-        framework. Anyone can download and edit for any professional website. Thank you for visiting
-        TemplateMo website.</p>
+      <p>Ofrecemos una amplia variedad de servicios de peluquería para damas y caballeros, realizados por
+        profesionales altamente capacitados para cuidar tu imagen y resaltar tu belleza en cada visita.</p>
       <div class="buttons">
-        <div class="primary-button">Discover More</div>
-        <div class="secondary-button">Contact Us</div>
+        <div class="primary-button">Descubrir Más</div>
+        <div class="secondary-button">Contáctanos</div>
       </div>
     </div>
   </div>
   <div class="carousel-slide">
     <div class="slideshow-banner-slide" bgImg="assets/images/slide-02.jpg">
-      <h2><em>Digital</em> Currency for you <br>&amp; Best <em>Crypto</em> Tips</h2>
+      <h2>Los <em>Productos</em> que tu <em>Cabello</em> Necesita<br>están <em>Aquí</em></h2>
       <div class="div-dec"></div>
-      <p>You will see a bunch of free CSS templates when you search on Google. TemplateMo website is
-        probably the best one because it is 100% free. It does not ask you anything in return.
-        You have a total freedom to use any template for any purpose.</p>
+      <p>Encuentra champús, acondicionadores, tratamientos corporales, capilares, tintes, decolorantes,
+        esmaltes, implementos profesionales y mucho más para que luzcas de la manera que deseas.</p>
       <div class="buttons">
-        <div class="primary-button">Discover More</div>
-        <div class="secondary-button">Contact Us</div>
+        <div class="primary-button">Descubrir Más</div>
+        <div class="secondary-button">Contáctanos</div>
       </div>
     </div>
   </div>
   <div class="carousel-slide">
     <div class="slideshow-banner-slide" bgImg="assets/images/slide-03.jpg">
-      <h2>Best One in Town<br>&amp; Crypto <em>Services</em></h2>
+      <h2>No te Pierdas<br>Nuestras <em>Ofertas</em></h2>
       <div class="div-dec"></div>
-      <p>When you browse through different tags on TemplateMo website, you can see a variety of CSS
-        templates which are responsive website designs for different individual needs. Please tell
-        your friends about our website. Thank you.</p>
+      <p>Aprovecha nuestros descuentos especiales en combos de corte, secado y aplicación de tintes.
+        Descubre las promociones exclusivas diseñadas para consentirte y ofrecerte el mejor precio.</p>
       <div class="buttons">
-        <div class="primary-button">Discover More</div>
-        <div class="secondary-button">Contact Us</div>
+        <div class="primary-button">Descubrir Más</div>
+        <div class="secondary-button">Contáctanos</div>
       </div>
     </div>
   </div>
 </div>
 
 <section class="services" id="services">
-  <div class="grid-container">
-    <div class="grid-container-item">
-      <div class="service-item" faIcon="archive">
-        <h4>CSS Templates</h4>
-        <p>TemplateMo website is the best for you to explore and download free website templates.</p>
-      </div>
-    </div>
-    <div class="grid-container-item">
-      <div class="service-item" faIcon="cloud">
-        <h4>HTML5 Web Pages</h4>
-        <p>Templates are based on Bootstrap 5 CSS framework. You can easily adapt or modify based on your needs.</p>
-      </div>
-    </div>
-    <div class="grid-container-item">
-      <div class="service-item" faIcon="charging-station">
-        <h4>Responsive Designs</h4>
-        <p>All of our CSS templates are 100% free to use for commercial or business websites.</p>
-      </div>
-    </div>
-    <div class="grid-container-item">
-      <div class="service-item" faIcon="suitcase">
-        <h4>Mobile and Tablet ready!</h4>
-        <p>Our HTML CSS templates are well-tested on mobile, tablet, and desktop compatibility.</p>
-      </div>
-    </div>
-    <div class="grid-container-item">
-      <div class="service-item" faIcon="archway">
-        <h4>Fast Customer Support</h4>
-        <p>Do not be hesitated to contact us if you have any question or concern about our templates.</p>
-      </div>
-    </div>
-    <div class="grid-container-item">
-      <div class="service-item" faIcon="puzzle-piece">
-        <h4>Fully Customizable</h4>
-        <p>If you have any idea or suggestion about new templates, feel free to let us know.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="simple-cta">
-  <h4>Business <em>Solutions</em> and <strong>Crypto</strong> Investments</h4>
-  <div class="primary-button">Discover More</div>
-  <div class="secondary-button">Contact Us</div>
-</section>
-
-<section class="about-us" id="about">
   <div class="section-container">
     <div class="section-heading">
-      <h6>About Us</h6>
-      <h4>Know Us Better</h4>
+      <h6>Nuestros Servicios</h6>
+      <h4>Lo Mejor en Peluquería</h4>
     </div>
-    <div class="col-lg-8">
-      <div class="naccs">
-        <div class="menu">
-          @for (tableTitle of tableTitles(); track tableTitle) {
-            <div class="gradient-border" [class.active]="$first">
-              <span>{{ tableTitle }}</span>
+    <div class="col-lg-12">
+      <div class="carousel custom-nav" [config]="carouselOptions()">
+        @for (service of services(); track service.id) {
+          <div class="carousel-slide item">
+            <div class="preview-product-card">
+              <div class="product-img-container">
+                @if (service.tag) {
+                  <span class="tag-nuevo" [style.background]="service.tag === 'OFERTA' ? '#EA4335' : (service.tag === 'PROMO' ? 'var(--color-accent-1)' : '#34A853')">{{ service.tag }}</span>
+                }
+                <img [src]="service.image" [alt]="service.title">
+              </div>
+              <div class="product-details">
+                <div class="product-header">
+                  <h3 class="product-name">{{ service.title }}</h3>
+                  <button class="btn-share"><i class="fas fa-share-alt"></i></button>
+                </div>
+                <div class="product-meta">
+                  <span class="product-price">${{ service.price | number:'1.2-2' }}</span>
+                  <span class="product-duration"><i class="far fa-clock"></i> {{ service.duration }}</span>
+                </div>
+                <p class="product-info">{{ service.description }}</p>
+                <button class="btn-add-cart" (click)="handleAddToCart(service)">
+                  <i class="fas fa-calendar-alt"></i> Reservar Cita
+                </button>
+              </div>
             </div>
-          }
-        </div>
-        @for (table of tables; track table) {
-          <li class="nacc-item" [class.active]="$first">
-            <div class="div-table" [(model)]="table"></div>
-          </li>
+          </div>
         }
       </div>
     </div>
-    <div class="col-lg-4">
-      <div class="right-content">
-        <h4>Please tell us about your idea and how you want it to be</h4>
-        <p>You are allowed to use this template for your websites. You are <b>NOT allowed</b> to
-          redistribute the template ZIP file on any other template websites.<br><br>Thank you for
-          downloading and using our templates. Please tell your friends about our website.</p>
-        <div class="primary-button" href="about-us.html">Discover More</div>
-      </div>
-    </div>
   </div>
 </section>
 
-<section class="calculator">
-  <div class="section-container">
-    <div class="col-lg-7">
-      <div class="left-image">
-        <img src="assets/images/calculator-image.png" alt="">
-      </div>
-    </div>
-    <div class="col-lg-5">
-      <div class="section-heading">
-        <h6>Your Freedom</h6>
-        <h4>Get a Financial Plan</h4>
-      </div>
-      <form id="calculate" action="" method="get" class="form">
-        <div class="row">
-          <div class="col-lg-6">
-            <fieldset>
-              <label for="name">Your Name</label>
-              <input type="name" name="name" id="name" placeholder="" autocomplete="on" required>
-            </fieldset>
-          </div>
-          <div class="col-lg-6">
-            <fieldset>
-              <label for="email">Your Email</label>
-              <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="" required="">
-            </fieldset>
-          </div>
-          <div class="col-lg-12">
-            <fieldset>
-              <label for="subject">Subject</label>
-              <input type="subject" name="subject" id="subject" placeholder="" autocomplete="on" >
-            </fieldset>
-          </div>
-          <div class="col-lg-12">
-            <fieldset>
-              <label for="chooseOption" class="form-label">Your Reason</label>
-              <select name="Category" class="form-select" aria-label="Default select example" id="chooseOption" onchange="this.form.click()">
-                  <option selected>Choose an Option</option>
-                  <option type="checkbox" name="option1" value="Online Banking">Online Banking</option>
-                  <option value="Financial Control">Financial Control</option>
-                  <option value="Yearly Profit">Yearly Profit</option>
-                  <option value="Crypto Investment">Crypto Investment</option>
-              </select>
-          </fieldset>
-          </div>
-          <div class="col-lg-12">
-            <fieldset>
-              <button type="submit" id="form-submit" class="secondary-button">Submit Now</button>
-            </fieldset>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!--
-<section class="testimonials" id="testimonials">
+<section class="products" id="productos">
   <div class="section-container">
     <div class="section-heading">
-      <h6>Testimonials</h6>
-      <h4>What They Say</h4>
-    </div>
-    <div class="col-lg-10 offset-lg-1">
-      <div class="owl-testimonials owl-carousel" style="position: relative; z-index: 5;">
-        <div class="card" faIcon="quote-left">
-          <p>“Donec et nunc massa. Nullam non felis dignissim, dapibus turpis semper, vulputate lorem. Nam volutpat posuere tellus, in porttitor justo interdum nec. Aenean in dapibus risus, in euismod ligula. Aliquam vel scelerisque elit.”</p>
-          <h4>David Eigenberg</h4>
-          <span>CEO of Mexant</span>
-          <div class="right-image">
-            <img src="assets/images/testimonials-01.jpg" alt="">
-          </div>
-        </div>
-        <div class="card" faIcon="quote-left">
-          <p>“Etiam id ligula risus. Fusce fringilla nisl nunc, nec rutrum lectus cursus nec. In blandit nibh dolor, at rutrum leo accumsan porta. Nullam pulvinar eros porttitor risus condimentum tempus.”</p>
-          <h4>Andrew Garfield</h4>
-          <span>CTO of Mexant</span>
-          <div class="right-image">
-            <img src="assets/images/testimonials-01.jpg" alt="">
-          </div>
-        </div>
-        <div class="card" faIcon="quote-left">
-          <p>“Ut dictum vehicula massa, ac pharetra leo tincidunt eu. Phasellus in tristique magna, ac gravida leo. Integer sed lorem sapien. Ut viverra mauris sed lobortis commodo.”</p>
-          <h4>George Lopez</h4>
-          <span>Crypto Manager</span>
-          <div class="right-image">
-            <img src="assets/images/testimonials-01.jpg" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
--->
-
-<section class="testimonials" id="gallery">
-  <div class="section-container">
-    <div class="section-heading">
-      <h6>Gallery</h6>
-      <h4>Featured Images</h4>
+      <h6>Nuestros Productos</h6>
+      <h4>Productos de Calidad</h4>
     </div>
     <div class="col-lg-12">
       <div class="carousel custom-nav" [config]="carouselOptions()">
+        @for (product of products(); track product.id) {
         <div class="carousel-slide item">
-          <div class="media-card image" imgSrc="assets/images/service-image-01.jpg" imgAlt="Servicio 1">
+          <div class="preview-product-card">
+            <div class="product-img-container">
+              @if (product.tag) {
+              <span class="tag-nuevo"
+                [style.background]="product.tag === 'OFERTA' ? '#EA4335' : (product.tag === 'PROMO' ? 'var(--color-accent-1)' : '#34A853')">{{
+                product.tag }}</span>
+              }
+              <img [src]="product.image" [alt]="product.title">
+            </div>
+            <div class="product-details">
+              <div class="product-header">
+                <h3 class="product-name">{{ product.title }}</h3>
+                <button class="btn-share"><i class="fas fa-share-alt"></i></button>
+              </div>
+              <div class="product-meta">
+                <span class="product-price">${{ product.price | number:'1.2-2' }}</span>
+                <span class="product-duration bg-light text-dark border">En stock: {{ product.stock }}</span>
+              </div>
+
+              <div class="preview-colors-container mb-3 text-start mt-2" style="height:35px">
+              </div>
+
+              <p class="product-info">{{ product.description }}</p>
+              <button class="btn-add-cart" (click)="handleAddToCart(product)">
+                <i class="fas fa-shopping-cart"></i> Añadir al carrito
+              </button>
+            </div>
           </div>
         </div>
-        <div class="carousel-slide item">
-          <div class="media-card image" imgSrc="assets/images/service-image-02.jpg" imgAlt="Servicio 2">
-          </div>
-        </div>
-        <div class="carousel-slide item">
-          <div class="media-card image" imgSrc="assets/images/service-image-03.jpg" imgAlt="Servicio 3">
-          </div>
-        </div>
-        <div class="carousel-slide item">
-          <div class="media-card image" imgSrc="assets/images/about-left-image.jpg" imgAlt="Sobre Nosotros">
-          </div>
-        </div>
+        }
       </div>
     </div>
   </div>
-</section>
-
-<!--
-<section class="testimonials" id="videos">
-  <div class="section-container">
-    <div class="section-heading">
-      <h6>Multimedia</h6>
-      <h4>Curated Videos</h4>
-    </div>
-    <div class="col-lg-12">
-      <div class="carousel custom-nav" [config]="carouselOptions()">
-        <div class="carousel-slide item">
-          <div class="media-card video" imgSrc="assets/images/service-details-01.jpg" imgAlt="Video 1"
-            vidLabel="Nuestros Servicios" [vidConfig]="{
-            sources: [{url: 'assets/videos/ForBiggerEscapes.mp4'}],
-            audios: [],
-            texts: []
-            }">
-          </div>
-        </div>
-        <div class="carousel-slide item">
-          <div class="media-card video" imgSrc="assets/images/service-details-02.jpg" imgAlt="Video 2"
-            vidLabel="Conoce al Equipo" [vidConfig]="{
-            sources: [{url: 'assets/videos/01/video-01.mp4', type: 'video/mp4'}],
-            audios: [{label: 'Inglés', url: 'assets/videos/01/video-01.en.m4a', type: 'audio/mp4'},
-                      {label: 'Español', url: 'assets/videos/01/video-01.es.m4a', type: 'audio/mp4'},
-                      {label: 'Francés', url: 'assets/videos/01/video-01.fr.m4a', type: 'audio/mp4'},
-                      {label: 'Italiano', url: 'assets/videos/01/video-01.it.m4a', type: 'audio/mp4'}],
-            texts: [{label: 'Inglés', url: 'assets/videos/01/video-01.en.vtt', kind: 'subtitles'},
-                    {label: 'Español', url: 'assets/videos/01/video-01.es.vtt', kind: 'subtitles'},
-                    {label: 'Francés', url: 'assets/videos/01/video-01.fr.vtt', kind: 'subtitles'},
-                    {label: 'Italiano', url: 'assets/videos/01/video-01.it.vtt', kind: 'subtitles'}]
-            }">
-          </div>
-        </div>
-        <div class="carousel-slide item">
-          <div class="media-card video" imgSrc="assets/images/service-details-03.jpg" imgAlt="Video 3"
-            vidLabel="Casos de Éxito" [vidConfig]="{
-            sources: [],
-            audios: [],
-            texts: []
-            }">
-          </div>
-        </div>
-        <div class="carousel-slide item">
-          <div class="media-card video" imgSrc="assets/images/testimonials-01.jpg" imgAlt="Video 4"
-            vidLabel="Testimonios" [vidConfig]="{
-            sources: [],
-            audios: [],
-            texts: []
-            }">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
--->
-
-<section class="partners" [logos]="partnerLogos()">
 </section>
 
 <footer></footer>

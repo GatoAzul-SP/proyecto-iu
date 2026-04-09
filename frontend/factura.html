@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Factura - Variedades y Peluquería LG</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #000000; /* Negro para el texto principal */
+            margin: 0;
+            padding: 20px;
+            background-color: #ffffff; /* Fondo blanco */
+        }
+        .factura-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff; /* Fondo blanco del contenedor */
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #fd18c0; /* Rosa fucsia para el acento inferior */
+        }
+        .emisor-info h2 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+            text-transform: uppercase;
+            color: #fd18c0; /* Rosa fucsia para el nombre comercial */
+        }
+        .emisor-info p {
+            margin: 2px 0;
+        }
+        .doc-info {
+            text-align: right;
+        }
+        .doc-info h1 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            letter-spacing: 2px;
+            color: #cb69f2; /* Morado para el título "FACTURA" */
+        }
+        .cliente-info {
+            border: 1px solid #000000;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            color: #000000;
+        }
+        .cliente-info p {
+            margin: 2px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #000000;
+            padding: 8px;
+            text-align: left;
+            color: #000000;
+        }
+        th {
+            background-color: #f0f0f0; /* Gris muy claro para el fondo de cabecera */
+        }
+        .text-right {
+            text-align: right;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .totales-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .totales {
+            width: 50%;
+            border-collapse: collapse;
+        }
+        .totales td {
+            padding: 5px 8px;
+        }
+        .totales .val-total {
+            background-color: #cb69f2; /* Morado de fondo para el valor total */
+            color: #ffffff; /* Texto blanco en el valor total */
+        }
+        .footer-legal {
+            margin-top: 40px;
+            font-size: 9px;
+            border-top: 1px dashed #000000;
+            padding-top: 10px;
+            text-align: justify;
+            color: #000000;
+        }
+        .footer-legal strong {
+            color: #fd18c0; /* Un toque de rosa fucsia para las etiquetas */
+        }
+
+        /* ESTILOS ESPECÍFICOS PARA LA IMPRESIÓN (Ctrl+P) */
+        @media print {
+            body { 
+                padding: 0; 
+                background-color: #ffffff !important; 
+                color: #000000 !important;
+            }
+            .factura-container {
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                background-color: transparent !important;
+            }
+            .header {
+                border-bottom: 2px solid #000000 !important;
+            }
+            .emisor-info h2, .doc-info h1 {
+                color: #000000 !important;
+            }
+            th {
+                background-color: transparent !important;
+            }
+            .totales .val-total {
+                background-color: transparent !important;
+                color: #000000 !important;
+                font-weight: bold;
+            }
+            /* Asegurar que las etiquetas fucsias se impriman en negro */
+            .footer-legal strong {
+                color: #000000 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="factura-container">
+    
+    <div class="header">
+        <div class="emisor-info">
+            <h2>Variedades y Peluquería LG, C.A.</h2>
+            <p><strong>RIF:</strong> J-12345678-9</p> <p><strong>Domicilio Fiscal:</strong> C.C. Fin de Siglo, San Diego, Estado Carabobo.</p> </div>
+        <div class="doc-info">
+            <h1>FACTURA</h1> <p><strong>N° de Factura:</strong> 000125</p> <p><strong>N° de Control:</strong> 00-000550</p> <p><strong>Fecha de Emisión:</strong> 24/03/2026</p> <p><strong>Hora de Emisión:</strong> 06.36.00 p.m.</p> </div>
+    </div>
+
+    <div class="cliente-info">
+        <p><strong>Nombre/Razón Social:</strong> Francisco</p>
+        <p><strong>CI/RIF:</strong> V-12345678</p>
+        <p><strong>Domicilio Fiscal:</strong> San Diego, Carabobo</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th width="10%">Código</th>
+                <th width="10%">Cant.</th>
+                <th width="50%">Descripción</th>
+                <th width="15%" class="text-right">Precio Unitario</th>
+                <th width="15%" class="text-right">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">SRV-001</td>
+                <td class="text-center">1</td>
+                <td>Servicio de Aplicación de Tinte (Cabello Largo)</td>
+                <td class="text-right">400,00</td>
+                <td class="text-right">400,00</td>
+            </tr>
+            <tr>
+                <td class="text-center">SRV-005</td>
+                <td class="text-center">1</td>
+                <td>Servicio de Peinado Estilizado</td>
+                <td class="text-right">200,00</td>
+                <td class="text-right">200,00</td>
+            </tr>
+            <tr>
+                <td class="text-center">PRD-012</td>
+                <td class="text-center">1</td>
+                <td>Ampolla Capilar Hidratante (E)</td> <td class="text-right">50,00</td>
+                <td class="text-right">50,00</td>
+            </tr>
+            <tr>
+                <td colspan="5"><em>* El servicio de tinte incluye la entrega de guantes y capa descartable (Req. 9)</em></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="totales-container">
+        <table class="totales">
+            <tr>
+                <td><strong>Sub-Total de Operaciones:</strong></td>
+                <td class="text-right">650,00</td>
+            </tr>
+            <tr>
+                <td><strong>Descuento promocional (5% en servicios):</strong></td>
+                <td class="text-right">-30,00</td>
+            </tr>
+            <tr>
+                <td><strong>Monto Total Exento o Exonerado (E):</strong></td>
+                <td class="text-right">50,00</td>
+            </tr>
+            <tr>
+                <td><strong>Base Imponible (Servicios gravados):</strong></td>
+                <td class="text-right">570,00</td>
+            </tr>
+            <tr>
+                <td><strong>Impuesto al Valor Agregado (IVA) 16%:</strong></td>
+                <td class="text-right">91,20</td>
+            </tr>
+            <tr>
+                <td style="font-size: 16px;"><strong>VALOR TOTAL DE LA OPERACIÓN (Bs.):</strong></td>
+                <td class="text-right val-total" style="font-size: 16px;"><strong>711,20</strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="footer-legal">
+        <p><strong>Números de control asignados:</strong> desde el N° 00-000001 hasta el N° 00-001000</p> <p>
+            <strong>Imprenta Autorizada:</strong> Formatos y Sistemas Digitales C.A. | 
+            <strong>RIF:</strong> J-98765432-1 | 
+            <strong>Providencia SENIAT N°:</strong> 000123 de fecha 10/05/2015 </p>
+        <p><strong>Fecha de asignación del número de control:</strong> 15022026</p> </div>
+
+</div>
+
+</body>
+</html>

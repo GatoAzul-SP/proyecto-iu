@@ -1,0 +1,167 @@
+/* ==============================
+   ESTILOS DE FACTURA IMPRIMIBLE
+   ============================== */
+
+/* Wrapper for the non-printable controls overlay */
+.factura-controls-bar {
+    background-color: #f8f9fa;
+    padding: 15px 30px;
+    border-bottom: 2px solid #ddd;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.factura-wrapper {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #000000;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f9fa; /* Fondo gris externo sutil */
+    min-height: 100vh;
+}
+
+.factura-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #fd18c0;
+}
+
+.emisor-info h2 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #fd18c0;
+}
+
+.emisor-info p {
+    margin: 2px 0;
+}
+
+.doc-info {
+    text-align: right;
+}
+
+.doc-info h1 {
+    margin: 0 0 5px 0;
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: #cb69f2;
+}
+
+.cliente-info {
+    border: 1px solid #000000;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    color: #000000;
+}
+
+.cliente-info p {
+    margin: 2px 0;
+}
+
+.factura-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.factura-table th, .factura-table td {
+    border: 1px solid #000000;
+    padding: 8px;
+    text-align: left;
+    color: #000000;
+}
+
+.factura-table th {
+    background-color: #f0f0f0;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.totales-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.totales {
+    width: 50%;
+    border-collapse: collapse;
+}
+
+.totales td {
+    padding: 5px 8px;
+}
+
+.totales .val-total {
+    background-color: #cb69f2;
+    color: #ffffff;
+}
+
+.footer-legal {
+    margin-top: 40px;
+    font-size: 9px;
+    border-top: 1px dashed #000000;
+    padding-top: 10px;
+    text-align: justify;
+    color: #000000;
+}
+
+.footer-legal strong {
+    color: #fd18c0;
+}
+
+/* ESTILOS ESPECÍFICOS PARA LA IMPRESIÓN (Ctrl+P) */
+@media print {
+    .factura-controls-bar {
+        display: none !important;
+    }
+    
+    .factura-wrapper { 
+        padding: 0; 
+        background-color: #ffffff !important; 
+        color: #000000 !important;
+    }
+    .factura-container {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        background-color: transparent !important;
+    }
+    .header {
+        border-bottom: 2px solid #000000 !important;
+    }
+    .emisor-info h2, .doc-info h1 {
+        color: #000000 !important;
+    }
+    .factura-table th {
+        background-color: transparent !important;
+    }
+    .totales .val-total {
+        background-color: transparent !important;
+        color: #000000 !important;
+        font-weight: bold;
+    }
+    .footer-legal strong {
+        color: #000000 !important;
+    }
+}

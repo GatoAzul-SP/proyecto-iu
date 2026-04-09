@@ -1,0 +1,66 @@
+/* ========================
+   Checkout Layout
+   ======================== */
+.checkout-section {
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background-color: #f8f9fa;
+  min-height: 50vh;
+}
+
+.checkout-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+}
+
+.checkout-summary-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+  position: sticky;
+  top: 110px;
+  border-top: 4px solid var(--color-accent-1, #fd18c0);
+}
+
+.text-primary-color {
+  color: var(--color-accent-1, #fd18c0) !important;
+}
+
+.checkout-pay-btn {
+  background-color: var(--color-accent-1, #fd18c0);
+  border: none;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: opacity 0.3s, transform 0.2s;
+  color: #fff;
+}
+
+.checkout-pay-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.empty-checkout {
+  background: #fff;
+  border-radius: 12px;
+  padding: 60px 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+}
+
+.empty-checkout h3 {
+  color: #333;
+  font-weight: 700;
+}
+
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+}

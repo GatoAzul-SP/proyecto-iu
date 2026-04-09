@@ -1,0 +1,87 @@
+/* ========================
+   Payment Portal Layout
+   ======================== */
+.payment-section {
+  padding-top: 60px;
+  padding-bottom: 90px;
+  background-color: #f8f9fa;
+  min-height: 50vh;
+}
+
+.text-primary-color {
+  color: var(--color-accent-1, #fd18c0) !important;
+}
+
+.payment-summary-header {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  border-top: 4px solid var(--color-accent-1, #fd18c0);
+}
+
+.payment-summary-header h3 {
+  font-weight: 800;
+  color: #333;
+}
+
+.payment-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 35px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  border: 1px solid #eff0f2;
+  transition: transform 0.3s;
+}
+
+.payment-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+}
+
+.payment-amount-badge {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.form-label {
+  font-size: 0.9rem;
+}
+
+.form-control, .form-select {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--color-accent-1, #fd18c0);
+  box-shadow: 0 0 0 0.25rem rgba(253, 24, 192, 0.15);
+}
+
+.input-group-text {
+  border-radius: 0 8px 8px 0;
+  border-color: #ddd;
+}
+
+.submit-payment-btn {
+  background-color: var(--color-accent-1, #fd18c0);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 6px 20px rgba(253, 24, 192, 0.2);
+  transition: all 0.3s ease;
+}
+
+.submit-payment-btn:hover {
+  background-color: var(--color-accent-2, #cb69f2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(253, 24, 192, 0.3);
+  color: #fff;
+}

@@ -1,0 +1,442 @@
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  perspective: 1200px;
+}
+
+.loader.finished {
+  animation: 1s linear forwards load-finished-loader;
+}
+
+.loader.finished> :only-child {
+  animation: 1s linear forwards load-finished-content;
+}
+
+.loader > div {
+  transform-style: preserve-3d;
+  animation: 8s linear infinite anim-spin;
+}
+
+.triangle {
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.rhomboid {
+  clip-path: polygon(0 100%, 33.33333333333333% 0, 100% 0, 66.66666666666667% 100%);
+}
+
+.tangram {
+  position: relative;
+  --figure-width: 100px;
+  --figure-height: 100px;
+  --fw: var(--figure-width, 100px);
+  --fh: var(--figure-height, 100px);
+  --depth: 20px;
+  width: calc(var(--fw) * 5.656854249492380);
+  height: calc(var(--fh) * 5.414213562373095);
+  transform: translate(calc(var(--fw) * 1.4142), calc(var(--fh) * 1.2929));
+  transform-style: preserve-3d;
+  animation: 12.5s linear 1.5s infinite forwards running anim-tangram;
+}
+
+@media (width < 767px),
+(height < 640px) {
+  .tangram {
+    --figure-width: 50px;
+    --figure-height: 50px;
+    --depth: 10px;
+  }
+}
+
+/* ===== PIEZAS 3D ===== */
+
+/* Wrapper: posiciona, preserva 3D. SIN filter (rompe preserve-3d) */
+.tangram > .piece {
+  width: var(--figure-width, 100px);
+  height: var(--figure-height, 100px);
+  transform-origin: 0 0;
+  position: absolute;
+  transform-style: preserve-3d;
+}
+
+/* Caras (front/back) */
+.piece > .face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.piece > .front {
+  transform: translateZ(var(--depth));
+}
+
+.piece > .back {
+  transform: translateZ(calc(var(--depth) * -1));
+  filter: brightness(0.55);
+}
+
+/* ===== PAREDES LATERALES ===== */
+.wall {
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: brightness(0.7);
+}
+
+/* --- TRIÁNGULO: 3 paredes --- */
+
+/* Borde superior (0,0)→(W,0): horizontal a y=0 */
+.piece > .wall-top {
+  width: var(--fw);
+  height: calc(var(--depth) * 2);
+  transform-origin: 0 0;
+  transform: translateZ(var(--depth)) rotateX(-90deg);
+}
+
+/* Borde izquierdo (0,0)→(0,H): vertical a x=0 */
+.piece > .wall-left {
+  width: calc(var(--depth) * 2);
+  height: var(--fh);
+  transform-origin: 0 0;
+  transform: translateZ(var(--depth)) rotateY(90deg);
+}
+
+/* Hipotenusa (W,0)→(0,H): diagonal */
+.piece > .wall-hyp {
+  width: 141.42%;
+  height: calc(var(--depth) * 2);
+  transform-origin: 0 0;
+  transform: translateZ(var(--depth)) translate(var(--fw), 0px) rotateZ(135deg) rotateX(-90deg);
+}
+
+/* --- CUADRADO: 4 paredes --- */
+
+/* Borde derecho (W,0)→(W,H) */
+.piece > .wall-right {
+  width: calc(var(--depth) * 2);
+  height: var(--fh);
+  transform-origin: 0 0;
+  transform: translateZ(var(--depth)) translate(var(--fw), 0px) rotateY(90deg);
+}
+
+/* Borde inferior (0,H)→(W,H) */
+.piece > .wall-bottom {
+  width: var(--fw);
+  height: calc(var(--depth) * 2);
+  transform-origin: 0 0;
+  transform: translateZ(var(--depth)) translate(0px, var(--fh)) rotateX(-90deg);
+}
+
+/* --- ROMBOIDE: 2 paredes horizontales --- */
+
+/* Borde sup romboide (33.33%,0)→(100%,0) */
+.piece > .wall-rh-top {
+  left: 33.33%;
+  width: 66.67%;
+  height: calc(var(--depth) * 2);
+  transform-origin: 0 0;
+  transform: translateZ(var(--depth)) rotateX(-90deg);
+}
+
+/* Borde inf romboide (0,H)→(66.67%,H) */
+.piece > .wall-rh-bottom {
+  width: 66.67%;
+  height: calc(var(--depth) * 2);
+  transform-origin: 0 0;
+  transform: translateZ(var(--depth)) translate(0px, var(--fh)) rotateX(-90deg);
+}
+
+/* ===== ANIMACIONES DE PIEZAS ===== */
+
+.tangram > .f1,
+.tangram > .f2,
+.tangram > .f3,
+.tangram > .f4,
+.tangram > .f5,
+.tangram > .f6,
+.tangram > .f7 {
+  animation: 12.5s linear 1.5s infinite forwards running;
+}
+
+.loader.finished .tangram,
+.loader.finished .tangram > .piece {
+  animation-play-state: paused;
+}
+
+/* ESTADO INICIAL (El Cuadrado Perfecto) */
+.tangram > .f1 {
+  transform: translate(141.4213562373095%, 141.4213562373095%) rotate(-135deg) scale(2);
+  animation-name: anim-f1;
+}
+
+.tangram > .f2 {
+  transform: translate(141.4213562373095%, 141.4213562373095%) rotate(135deg) scale(2);
+  animation-name: anim-f2;
+}
+
+.tangram > .f3 {
+  transform: translate(282.8427124746190%, 282.8427124746190%) rotate(-180deg) scale(1.414213562373095);
+  animation-name: anim-f3;
+}
+
+.tangram > .f4 {
+  transform: translate(212.1320343559643%, 70.71067811865475%) rotate(-45deg);
+  animation-name: anim-f4;
+}
+
+.tangram > .f5 {
+  transform: translate(141.4213562373095%, 141.4213562373095%) rotate(45deg);
+  animation-name: anim-f5;
+}
+
+.tangram > .f6 {
+  transform: translate(141.4213562373095%, 141.4213562373095%) rotate(-45deg);
+  animation-name: anim-f6;
+}
+
+.tangram > .f7 {
+  transform: translate(0%, 212.1320343559643%) scale(2.121320343559643, 0.7071067811865475);
+  animation-name: anim-f7;
+}
+
+/* Rotación 3D continua */
+@keyframes anim-spin {
+  from {
+    transform: rotateY(0deg);
+  }
+
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+/* Posicionamiento del Tangram */
+@keyframes anim-tangram {
+
+  0%,
+  4% {
+    transform: translate(calc(var(--fw) * 1.4142), calc(var(--fh) * 1.2929));
+  }
+
+  8%,
+  20% {
+    transform: translate(calc(var(--fw) * -0.2787), calc(var(--fh) * 0.3720));
+  }
+
+  28%,
+  40% {
+    transform: translate(calc(var(--fw) * 0.6820), calc(var(--fh) * -0.2929));
+  }
+
+  48%,
+  60% {
+    transform: translate(calc(var(--fw) * -0.1716), calc(var(--fh) * 0.9071));
+  }
+
+  68%,
+  80% {
+    transform: translate(calc(var(--fw) * 1.4142), calc(var(--fh) * 1.2929));
+  }
+
+  88%,
+  100% {
+    transform: translate(calc(var(--fw) * 1.4142), calc(var(--fh) * 1.2929));
+  }
+}
+
+/* PIEZA 1 */
+@keyframes anim-f1 {
+
+  8%,
+  20% {
+    transform: translate(340%, 340%) rotate(-135deg) scale(2);
+  }
+
+  28%,
+  40% {
+    transform: translate(400%, 400%) rotate(-180deg) scale(2);
+  }
+
+  48%,
+  60% {
+    transform: translate(400%, 300%) rotate(-90deg) scale(2);
+  }
+
+  68%,
+  100% {
+    transform: translate(141.4213562373095%, 141.4213562373095%) rotate(-135deg) scale(2);
+  }
+}
+
+/* PIEZA 2 */
+@keyframes anim-f2 {
+
+  8%,
+  20% {
+    transform: translate(480%, 200%) rotate(45deg) scale(2);
+  }
+
+  28%,
+  40% {
+    transform: translate(200%, 200%) rotate(0deg) scale(2);
+  }
+
+  48%,
+  60% {
+    transform: translate(200%, 300%) rotate(180deg) scale(2);
+  }
+
+  68%,
+  100% {
+    transform: translate(141.4213562373095%, 141.4213562373095%) rotate(135deg) scale(2);
+  }
+}
+
+/* PIEZA 3 */
+@keyframes anim-f3 {
+
+  8%,
+  20% {
+    transform: translate(100%, 0%) rotate(45deg) scale(1.414213562373095);
+  }
+
+  28%,
+  40% {
+    transform: translate(500%, 300%) rotate(135deg) scale(1.414213562373095);
+  }
+
+  48%,
+  60% {
+    transform: translate(300%, 200%) rotate(-45deg) scale(1.414213562373095);
+  }
+
+  68%,
+  100% {
+    transform: translate(282.8427124746190%, 282.8427124746190%) rotate(-180deg) scale(1.414213562373095);
+  }
+}
+
+/* PIEZA 4 */
+@keyframes anim-f4 {
+
+  8%,
+  20% {
+    transform: translate(470%, 370%) rotate(104deg);
+  }
+
+  28%,
+  40% {
+    transform: translate(0%, 300%) rotate(45deg);
+  }
+
+  48%,
+  60% {
+    transform: translate(200%, 200%) rotate(-90deg);
+  }
+
+  68%,
+  100% {
+    transform: translate(212.1320343559643%, 70.71067811865475%) rotate(-45deg);
+  }
+}
+
+/* PIEZA 5 */
+@keyframes anim-f5 {
+
+  8%,
+  20% {
+    transform: translate(300%, 450%) rotate(180deg);
+  }
+
+  28%,
+  40% {
+    transform: translate(200%, 300%) rotate(180deg);
+  }
+
+  48%,
+  60% {
+    transform: translate(200%, 300%) rotate(-90deg);
+  }
+
+  68%,
+  100% {
+    transform: translate(141.4213562373095%, 141.4213562373095%) rotate(45deg);
+  }
+}
+
+/* PIEZA 6 */
+@keyframes anim-f6 {
+
+  8%,
+  20% {
+    transform: translate(100%, 100%) rotate(0deg);
+  }
+
+  28%,
+  40% {
+    transform: translate(100%, 300%) rotate(0deg);
+  }
+
+  48%,
+  60% {
+    transform: translate(300%, 60%) rotate(45deg);
+  }
+
+  68%,
+  100% {
+    transform: translate(141.4213562373095%, 141.4213562373095%) rotate(-45deg);
+  }
+}
+
+/* PIEZA 7 */
+@keyframes anim-f7 {
+
+  8%,
+  20% {
+    transform: translate(150%, 150%) rotate(45deg) scale(2.121320343559643, 0.7071067811865475);
+  }
+
+  28%,
+  40% {
+    transform: translate(150%, 350%) rotate(-135deg) scale(2.121320343559643, -0.7071067811865475);
+  }
+
+  48%,
+  60% {
+    transform: translate(250%, 150%) rotate(45deg) scale(2.121320343559643, 0.7071067811865475);
+  }
+
+  68%,
+  100% {
+    transform: translate(0%, 212.1320343559643%) scale(2.121320343559643, 0.7071067811865475);
+  }
+}
+
+@keyframes load-finished-loader {
+  to {
+    visibility: hidden;
+  }
+}
+
+@keyframes load-finished-content {
+  50% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}

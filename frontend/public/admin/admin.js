@@ -23,6 +23,29 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	})();
 
+	// ---------- Global Settings (Loader) ----------
+	const toggleLoader = document.getElementById('toggle-loader');
+	if (toggleLoader) {
+		try {
+			const loaderEnabled = loadSetting('admin_loader_enabled');
+			toggleLoader.checked = loaderEnabled === true;
+		} catch (e) {}
+
+		toggleLoader.addEventListener('change', function() {
+			try {
+				saveSetting('admin_loader_enabled', this.checked);
+				// Inform the iframe/app via BroadcastChannel
+				if (window.BroadcastChannel) {
+					const bc = new BroadcastChannel('admin-loader');
+					bc.postMessage({ type: 'loader-toggled', enabled: this.checked });
+					bc.close();
+				}
+			} catch (e) {
+				console.warn('No se pudo guardar la configuración del loader', e);
+			}
+		});
+	}
+
 	// ---------- Color picker functionality (unchanged) ----------
 	const colorInputs = document.querySelectorAll('#colors-section input[type="color"]');
 	const colorTextInputs = document.querySelectorAll('#colors-section input[type="text"][id$="-hex"]');
@@ -705,7 +728,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		return openFontDB().then(db => {
 			const tx = db.transaction(FONT_STORE_NAME, "readwrite");
 			const store = tx.objectStore(FONT_STORE_NAME);
-			return storeDBObject(store, key, blob);
+			return storeDBObject(store, name, { name, blob, timestamp: Date.now() });
 		});
 	}
 
@@ -870,7 +893,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		const doc = safeGetIframeDoc();
 		if (!doc) return;
 
-		applySiteFonts(doc, settings);
+		applySiteFonts(doc.body || doc.documentElement, settings);
 
 		/*
 		// Apply families: primary -> titles (h2), secondary -> subtitles (h4) and paragraphs
@@ -954,7 +977,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					// Inject custom font if available
 					const fontData = customFontsCache.find(cf => cf.name === customName);
 					if (fontData && fontData.blob) {
-						injectCustomFontFace(document, customName, fontData.blob);
+						injectCustomFont(document, customName, fontData.blob);
 					}
 					return `'${customName}', sans-serif`;
 				}
@@ -1510,8 +1533,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		// inject into iframe
 		const doc = safeGetIframeDoc();
 
-		applySiteFonts(doc, {primary: font});
-		applySiteFonts(document, {primary: font});
+		if (doc) applySiteFonts(doc.body || doc.documentElement, {primary: font});
+		applySiteFonts(document.body || document.documentElement, {primary: font});
 
 		if (font.startsWith("custom:")) {
 			const fontName = font.replace('custom:', '');
@@ -1531,8 +1554,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		// inject into iframe
 		const doc = safeGetIframeDoc();
 
-		applySiteFonts(doc, {secondary: font});
-		applySiteFonts(document, {secondary: font});
+		if (doc) applySiteFonts(doc.body || doc.documentElement, {secondary: font});
+		applySiteFonts(document.body || document.documentElement, {secondary: font});
 
 		if (font.startsWith("custom:")) {
 			const fontName = font.replace('custom:', '');
@@ -1556,7 +1579,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	function applySecondaryFontOnly(font){
 		if (!font) return;
 		const doc = safeGetIframeDoc();
-		if (doc) injectGoogleFontInDoc(doc, font);
+		if (doc) injectGoogleFont(doc, font);
 		try{ if(doc) doc.body.style.fontFamily = font + ', sans-serif'; }catch(e){}
 		try{ if(doc) doc.querySelectorAll('h4').forEach(h => h.style.fontFamily = font + ', sans-serif'); }catch(e){}
 		try{ if(doc) doc.querySelectorAll('p').forEach(p => p.style.fontFamily = font + ', sans-serif'); }catch(e){}

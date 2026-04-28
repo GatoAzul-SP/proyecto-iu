@@ -1,0 +1,63 @@
+<!-- Only render the loader if the service says it should be enabled -->
+<div class="loader" *ngIf="loaderService.isEnabled()" [class.finished]="!isVisible" style="background-color: var(--color-background, white); z-index: 9999;">
+  <div>
+    <div class="tangram">
+      <!-- f1: Triángulo Grande Azul -> Acento 1 -->
+      <div class="f1 piece">
+        <div class="triangle face front" style="background-color: var(--color-accent-1, dodgerblue);"></div>
+        <div class="triangle face back" style="background-color: var(--color-accent-1, dodgerblue);"></div>
+        <div class="wall wall-top" style="background-color: var(--color-accent-1, dodgerblue);"></div>
+        <div class="wall wall-left" style="background-color: var(--color-accent-1, dodgerblue);"></div>
+        <div class="wall wall-hyp" style="background-color: var(--color-accent-1, dodgerblue);"></div>
+      </div>
+      <!-- f2: Triángulo Grande Rojo -> Acento 2 -->
+      <div class="f2 piece">
+        <div class="triangle face front" style="background-color: var(--color-accent-2, crimson);"></div>
+        <div class="triangle face back" style="background-color: var(--color-accent-2, crimson);"></div>
+        <div class="wall wall-top" style="background-color: var(--color-accent-2, crimson);"></div>
+        <div class="wall wall-left" style="background-color: var(--color-accent-2, crimson);"></div>
+        <div class="wall wall-hyp" style="background-color: var(--color-accent-2, crimson);"></div>
+      </div>
+      <!-- f3: Triángulo Mediano Morado -> Foreground -->
+      <div class="f3 piece">
+        <div class="triangle face front" style="background-color: var(--color-foreground, blueviolet);"></div>
+        <div class="triangle face back" style="background-color: var(--color-foreground, blueviolet);"></div>
+        <div class="wall wall-top" style="background-color: var(--color-foreground, blueviolet);"></div>
+        <div class="wall wall-left" style="background-color: var(--color-foreground, blueviolet);"></div>
+        <div class="wall wall-hyp" style="background-color: var(--color-foreground, blueviolet);"></div>
+      </div>
+      <!-- f4: Triángulo Pequeño Naranja -> Background shadow -->
+      <div class="f4 piece">
+        <div class="triangle face front" style="background-color: var(--color-background-shadowed, orangered);"></div>
+        <div class="triangle face back" style="background-color: var(--color-background-shadowed, orangered);"></div>
+        <div class="wall wall-top" style="background-color: var(--color-background-shadowed, orangered);"></div>
+        <div class="wall wall-left" style="background-color: var(--color-background-shadowed, orangered);"></div>
+        <div class="wall wall-hyp" style="background-color: var(--color-background-shadowed, orangered);"></div>
+      </div>
+      <!-- f5: Triángulo Pequeño Cian -> Acento 1 -->
+      <div class="f5 piece">
+        <div class="triangle face front" style="background-color: var(--color-accent-1, darkcyan);"></div>
+        <div class="triangle face back" style="background-color: var(--color-accent-1, darkcyan);"></div>
+        <div class="wall wall-top" style="background-color: var(--color-accent-1, darkcyan);"></div>
+        <div class="wall wall-left" style="background-color: var(--color-accent-1, darkcyan);"></div>
+        <div class="wall wall-hyp" style="background-color: var(--color-accent-1, darkcyan);"></div>
+      </div>
+      <!-- f6: Cuadrado Verde -> Acento 2 -->
+      <div class="f6 piece">
+        <div class="face front" style="background-color: var(--color-accent-2, limegreen);"></div>
+        <div class="face back" style="background-color: var(--color-accent-2, limegreen);"></div>
+        <div class="wall wall-top" style="background-color: var(--color-accent-2, limegreen);"></div>
+        <div class="wall wall-right" style="background-color: var(--color-accent-2, limegreen);"></div>
+        <div class="wall wall-bottom" style="background-color: var(--color-accent-2, limegreen);"></div>
+        <div class="wall wall-left" style="background-color: var(--color-accent-2, limegreen);"></div>
+      </div>
+      <!-- f7: Romboide Naranja -> Foreground -->
+      <div class="f7 piece">
+        <div class="rhomboid face front" style="background-color: var(--color-foreground, orange);"></div>
+        <div class="rhomboid face back" style="background-color: var(--color-foreground, orange);"></div>
+        <div class="wall wall-rh-top" style="background-color: var(--color-foreground, orange);"></div>
+        <div class="wall wall-rh-bottom" style="background-color: var(--color-foreground, orange);"></div>
+      </div>
+    </div>
+  </div>
+</div>

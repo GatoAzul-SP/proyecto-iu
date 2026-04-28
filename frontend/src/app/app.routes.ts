@@ -6,20 +6,21 @@ import { Payment } from "./payment/payment";
 import { Factura } from "./factura/factura";
 import { Profile } from "./profile/profile";
 import { Lista } from "./lista/lista";
+import { delayGuard } from "./loader/delay.guard";
 
 export const routes: Routes = [
 	{ path: "",
-	  component: Home },
+	  component: Home, canActivate: [delayGuard] },
 	{ path: "login",
-	  component: Login },
+	  component: Login, canActivate: [delayGuard] },
 	{ path: "checkout",
-	  component: Checkout },
+	  component: Checkout, canActivate: [delayGuard] },
 	{ path: "payment",
-	  component: Payment },
+	  component: Payment, canActivate: [delayGuard] },
 	{ path: "factura",
-	  component: Factura },
+	  component: Factura, canActivate: [delayGuard] },
 	{ path: "profile",
-	  component: Profile },
+	  component: Profile, canActivate: [delayGuard] },
 	{ path: "lista",
-	  component: Lista }
+	  component: Lista, canActivate: [delayGuard] }
 ];

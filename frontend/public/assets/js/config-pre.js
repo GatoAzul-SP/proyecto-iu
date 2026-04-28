@@ -33,7 +33,7 @@ function openDB(name, ver, cb_upgrade) {
 
 function getDBObject(store, key) {
 	return new Promise((resolve, reject) => {
-		const request = store.get(name);
+		const request = store.get(key);
 		request.onsuccess = () => { resolve(request.result); };
 		request.onerror = () => { reject(request.error); };
 	});
@@ -75,6 +75,7 @@ function loadCustomFont(name) {
 }
 
 function applySiteColors(root, colors) {
+	if (!root || !root.style) return;
 	try {
 		if (!colors) {
 			colors = loadSetting("siteColors");
@@ -113,7 +114,7 @@ function injectCustomFont(docLike, fontName, blob) {
 			const dataUrl = e.target.result;
 
 			const id = "custom-font-" + fontName.replace(/\s+/g, "-");
-			if (docLike.getElementById(styleId)) { resolve(); return; }
+			if (docLike.getElementById(id)) { resolve(); return; }
 
 			const style = document.createElement("style");
 			style.id = id;
@@ -133,6 +134,10 @@ function injectCustomFont(docLike, fontName, blob) {
 }
 
 function applySiteFonts(root, fonts) {
+	if (!root || !root.style) {
+		console.warn("applySiteFonts: root is invalid or missing style", root);
+		return;
+	}
 	const docLike = root.getRootNode();
 	if (!docLike.getElementById) {
 		throw new TypeError("'root' no está conectado a un (sub)documento");
@@ -148,7 +153,7 @@ function applySiteFonts(root, fonts) {
 			if (fontName.startsWith("custom:")) {
 				fontName = fontName.slice("custom:".length);
 				loadCustomFont(fontName).then(font =>
-					injectCustomFontFace(docLike, fontName, font.blob)
+					injectCustomFont(docLike, fontName, font.blob)
 				).catch(e => { console.warn("Error cargando fuente primaria:", e); }
 				).then(() => {
 					root.style.setProperty(`--font-${propName}`, `"${fontName}"`);
